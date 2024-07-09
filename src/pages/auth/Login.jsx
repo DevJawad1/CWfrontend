@@ -5,6 +5,8 @@ import * as Yup from 'yup';
 import carouselimg1 from '../../img/carousel-1.jpg'
 import './auth.css'
 import Toplabel from '../../component/Toplabel';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 const Login = () => {
 
@@ -13,6 +15,23 @@ const Login = () => {
             .email('Invalid email address')
             .required('Email is required'),
     });
+    const handleSubmit = async (values, { setSubmitting }) => {
+        try {
+        setloading(true)
+        const response = await axios.post('http://localhost:5000/member/login', values);
+        console.log('Form submitted successfully:', response.data);
+        // Handle success (e.g., display a success message, redirect, etc.)
+        if(response.data.status){
+            toast.success(response.data.message);
+        }else{toast.error(response.data.message);}
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        toast.error(error.message)
+      } finally {
+        setSubmitting(false);
+        setloading(false)
+      }
+    }
     return (
         <div>
             {/* <Toplabel/> */}
@@ -29,10 +48,7 @@ const Login = () => {
                 <Formik
                     initialValues={{ email: '', fullName: '', password: '' }}
                     validationSchema={SignUpSchema}
-                    onSubmit={(values) => {
-                        // Handle form submission
-                        console.log(values);
-                    }}
+                    onSubmit={handleSubmit}
                 >
                     {({ isSubmitting }) => (
                         <Form >
