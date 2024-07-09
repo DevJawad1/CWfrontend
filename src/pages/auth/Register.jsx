@@ -20,8 +20,7 @@ const Register = () => {
             .max(25, 'Too Long!')
             .required('Last name is required'),
         phone: Yup.string()
-            .min(10, 'Too Short!')
-            .max(10, 'Too Long!')
+            .matches(/^[0-9]{10}$/, 'Phone number must be exactly 11 digits')
             .required('Phone number is required'),
         password: Yup.string()
             .min(6, 'Password must be at least 6 characters')
@@ -32,6 +31,7 @@ const Register = () => {
             .required('Password is required'),
     });
 
+    // @Cds52923#
     const handleSubmit = async (values, { setSubmitting }) => {
         console.log(values);
       try {
@@ -68,35 +68,35 @@ const Register = () => {
                     //     console.log(values);
                     // }
                 >
-                    {({ isSubmitting }) => (
+                    {({ isSubmitting, touched, errors }) => (
                         <Form >
-
+                            {/* ${touched.firstName && errors.firstName ? 'is-invalid' : ''} */}
                             <div className="d-md-flex">
                                 <div className='px-md-2 w-100'>
                                     <span htmlFor="fullName">First Name:</span> <br/>
-                                    <Field type="text" name="firstName" className="w-100 bg-light rounded" style={{height:"50px", border:"2px solid #202C45", outline:"none"}}/>
+                                    <Field type="text" name="firstName" className="w-100 bg-light rounded" style={{height:"50px", border:touched.firstName && errors.firstName ? '2px solid #DC3747' : '2px solid #202C45', outline:"none"}}/>
                                     <ErrorMessage name="firstName" component="div" className='text-danger'/>
                                 </div>
                                 <div className='px-md-2 w-100 mt-2 mt-md-0'>
                                     <span htmlFor="lastName">Last Name:</span><br/>
-                                    <Field type="text" name="lastName" className="w-100 bg-light rounded" style={{height:"50px", border:"2px solid #202C45", outline:"none"}}/>
+                                    <Field type="text" name="lastName" className="w-100 bg-light rounded" style={{height:"50px", border:touched.lastName && errors.lastName ? '2px solid #DC3747' : '2px solid #202C45', outline:"none"}}/>
                                     <ErrorMessage name="lastName" component="div" className='text-danger'/>
                                 </div>
                             </div>
                             <div className='px-md-2 mt-2'>
                                 <span htmlFor="email">Phone number</span><br />
-                                <Field type="number" name="phone" className="w-100 bg-light rounded" style={{height:"50px", border:"2px solid #202C45", outline:"none"}}/>
+                                <Field type="number" name="phone" className="w-100 bg-light rounded" style={{height:"50px", border:touched.phone && errors.phone ? '2px solid #DC3747' : '2px solid #202C45', outline:"none"}}/>
                                 <ErrorMessage name="phone" component="div" className='text-danger'/>
                             </div>
                             <div className='px-md-2 mt-2'>
                                 <span htmlFor="email">Email</span><br />
-                                <Field type="email" name="email" className="w-100 bg-light rounded" style={{height:"50px", border:"2px solid #202C45", outline:"none"}}/>
+                                <Field type="email" name="email" className="w-100 bg-light rounded" style={{height:"50px", border:touched.email && errors.email ? '2px solid #DC3747' : '2px solid #202C45', outline:"none"}}/>
                                 <ErrorMessage name="email" component="div" className='text-danger'/>
                             </div>
                             <div className="d-md-flex mt-2">
                             <div className='w-100 px-md-2'>
                                 <span htmlFor="password">Password</span><br />
-                                <Field type="password" name="password" className="w-100 bg-light rounded" style={{height:"50px", border:"2px solid #202C45", outline:"none"}}/>
+                                <Field type="password" name="password" className="w-100 bg-light rounded" style={{height:"50px", border:touched.password && errors.password ? '2px solid #DC3747' : '2px solid #202C45', outline:"none"}}/>
                                 <ErrorMessage name="password" component="div"className='text-danger' />
                             </div>
                             <div className='w-100 px-md-2 mt-2 mt-md-0'>
