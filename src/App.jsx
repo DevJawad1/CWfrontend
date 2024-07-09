@@ -7,11 +7,13 @@ import LandingPage from './pages/LandingPage'
 import Register from './pages/auth/Register'
 import Login from './pages/auth/Login'
 import Loading from './component/Loading'
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const [count, setCount] = useState(0)
   return (
     <>
+        <ToastContainer />
      <Routes>
         <Route path='/home' element={<LandingPage/>}/>
         <Route path='/register' element={<Register/>}/>

@@ -1,10 +1,17 @@
-import React from 'react'
-import Navbar from '../../component/Navbar'
+import React, { useState } from 'react'
+
+// install
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// file
+import Navbar from '../../component/Navbar'
 import carouselimg1 from '../../img/carousel-1.jpg'
 import './auth.css'
 import axios from 'axios';
+import Loading from '../../component/Loading';
 const Register = () => {
 
     const SignUpSchema = Yup.object().shape({
@@ -32,17 +39,22 @@ const Register = () => {
     });
 
     // @Cds52923#
+    const [loading, setloading] = useState(false)
     const handleSubmit = async (values, { setSubmitting }) => {
-        console.log(values);
-      try {
+        try {
+        setloading(true)
         const response = await axios.post('http://localhost:5000/member/register', values);
         console.log('Form submitted successfully:', response.data);
         // Handle success (e.g., display a success message, redirect, etc.)
+        if(response.data.status){
+            toast.success(response.data.message);
+        }else{toast.error(response.data.message);}
       } catch (error) {
         console.error('Error submitting form:', error);
-        // Handle error (e.g., display an error message)
+        toast.error(error.message)
       } finally {
         setSubmitting(false);
+        setloading(false)
       }
     }
     
@@ -50,6 +62,7 @@ const Register = () => {
         <div>
             {/* <Toplabel/> */}
             <Navbar />
+            {loading?<Loading/>:null}
             <div className="d-md-flex register-box">
             <div className='card col-md-6 p-0 border-0 '>
                 <div className="cover d-flex justify-content-center align-items-center">

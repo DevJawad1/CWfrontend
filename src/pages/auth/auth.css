@@ -9,6 +9,9 @@
 .register-box{
     /* height: 85vh; */
 }
+.register-box input{
+    background-color: #E8F0FE !important;
+}
 @media (max-width:600px) {
     .register-box .inp-holder{
         box-shadow: none !important;
