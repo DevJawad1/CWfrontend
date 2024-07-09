@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import carouselimg1 from '../../img/carousel-1.jpg'
 import './auth.css'
-import Toplabel from '../../component/Toplabel';
+import axios from 'axios';
 const Register = () => {
 
     const SignUpSchema = Yup.object().shape({
@@ -19,6 +19,10 @@ const Register = () => {
             .min(2, 'Too Short!')
             .max(25, 'Too Long!')
             .required('Last name is required'),
+        phone: Yup.string()
+            .min(10, 'Too Short!')
+            .max(10, 'Too Long!')
+            .required('Phone number is required'),
         password: Yup.string()
             .min(6, 'Password must be at least 6 characters')
             .matches(/[a-z]/, 'Password must contain at least one lowercase letter')
@@ -27,6 +31,21 @@ const Register = () => {
             .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Password must contain at least one special character')
             .required('Password is required'),
     });
+
+    const handleSubmit = async (values, { setSubmitting }) => {
+        console.log(values);
+      try {
+        const response = await axios.post('http://localhost:5000/member/register', values);
+        console.log('Form submitted successfully:', response.data);
+        // Handle success (e.g., display a success message, redirect, etc.)
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        // Handle error (e.g., display an error message)
+      } finally {
+        setSubmitting(false);
+      }
+    }
+    
     return (
         <div>
             {/* <Toplabel/> */}
@@ -43,10 +62,11 @@ const Register = () => {
                 <Formik
                     initialValues={{ email: '', fullName: '', password: '' }}
                     validationSchema={SignUpSchema}
-                    onSubmit={(values) => {
-                        // Handle form submission
-                        console.log(values);
-                    }}
+                    onSubmit={handleSubmit}
+                    // (values) => {
+                    //     // Handle form submission
+                    //     console.log(values);
+                    // }
                 >
                     {({ isSubmitting }) => (
                         <Form >
@@ -55,28 +75,33 @@ const Register = () => {
                                 <div className='px-md-2 w-100'>
                                     <span htmlFor="fullName">First Name:</span> <br/>
                                     <Field type="text" name="firstName" className="w-100 bg-light rounded" style={{height:"50px", border:"2px solid #202C45", outline:"none"}}/>
-                                    <ErrorMessage name="firstName" component="div" />
+                                    <ErrorMessage name="firstName" component="div" className='text-danger'/>
                                 </div>
-                                <div className='px-md-2 w-100'>
+                                <div className='px-md-2 w-100 mt-2 mt-md-0'>
                                     <span htmlFor="lastName">Last Name:</span><br/>
                                     <Field type="text" name="lastName" className="w-100 bg-light rounded" style={{height:"50px", border:"2px solid #202C45", outline:"none"}}/>
-                                    <ErrorMessage name="lastName" component="div" />
+                                    <ErrorMessage name="lastName" component="div" className='text-danger'/>
                                 </div>
+                            </div>
+                            <div className='px-md-2 mt-2'>
+                                <span htmlFor="email">Phone number</span><br />
+                                <Field type="number" name="phone" className="w-100 bg-light rounded" style={{height:"50px", border:"2px solid #202C45", outline:"none"}}/>
+                                <ErrorMessage name="phone" component="div" className='text-danger'/>
                             </div>
                             <div className='px-md-2 mt-2'>
                                 <span htmlFor="email">Email</span><br />
                                 <Field type="email" name="email" className="w-100 bg-light rounded" style={{height:"50px", border:"2px solid #202C45", outline:"none"}}/>
-                                <ErrorMessage name="email" component="div" />
+                                <ErrorMessage name="email" component="div" className='text-danger'/>
                             </div>
                             <div className="d-md-flex mt-2">
                             <div className='w-100 px-md-2'>
                                 <span htmlFor="password">Password</span><br />
                                 <Field type="password" name="password" className="w-100 bg-light rounded" style={{height:"50px", border:"2px solid #202C45", outline:"none"}}/>
-                                <ErrorMessage name="password" component="div" />
+                                <ErrorMessage name="password" component="div"className='text-danger' />
                             </div>
                             <div className='w-100 px-md-2 mt-2 mt-md-0'>
                                 <span htmlFor="password">Confirm password</span><br />
-                                <Field type="password" className="w-100 bg-light rounded" style={{height:"50px", border:"2px solid #202C45", outline:"none"}} />
+                                <input type="password" className="w-100 bg-light rounded" style={{height:"50px", border:"2px solid #202C45", outline:"none"}} />
                             </div>
 
                             </div>
