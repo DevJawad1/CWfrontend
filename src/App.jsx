@@ -8,6 +8,7 @@ import Register from './pages/auth/Register'
 import Login from './pages/auth/Login'
 import Loading from './component/Loading'
 import { ToastContainer } from 'react-toastify';
+import Dashboard from './pages/Dashboard'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -19,6 +20,7 @@ function App() {
         <Route path='/register' element={<Register/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/loading' element={<Loading/>}/>
+        <Route path='/dashboard' element={<Dashboard/>}/>
      </Routes>
     </>
   )

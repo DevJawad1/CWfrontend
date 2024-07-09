@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../../component/Navbar'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -7,22 +7,28 @@ import './auth.css'
 import Toplabel from '../../component/Toplabel';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from 'react-router-dom';
-const Login = () => {
-
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+const Login = () => {   
+    const navigate= useNavigate()
     const SignUpSchema = Yup.object().shape({
         email: Yup.string()
             .email('Invalid email address')
             .required('Email is required'),
     });
+
+    const [loading, setloading] = useState(false)
     const handleSubmit = async (values, { setSubmitting }) => {
         try {
         setloading(true)
-        const response = await axios.post('http://localhost:5000/member/login', values);
+        const response = await axios.post('http://localhost:5000/member/loginMember', values);
         console.log('Form submitted successfully:', response.data);
         // Handle success (e.g., display a success message, redirect, etc.)
         if(response.data.status){
             toast.success(response.data.message);
+            setTimeout(() => {
+                navigate("/dashboard")
+            }, 1000);
         }else{toast.error(response.data.message);}
       } catch (error) {
         console.error('Error submitting form:', error);

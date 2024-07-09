@@ -12,8 +12,9 @@ import carouselimg1 from '../../img/carousel-1.jpg'
 import './auth.css'
 import axios from 'axios';
 import Loading from '../../component/Loading';
+import { useNavigate } from 'react-router-dom';
 const Register = () => {
-
+    const navigate= useNavigate()
     const SignUpSchema = Yup.object().shape({
         email: Yup.string()
             .email('Invalid email address')
@@ -48,6 +49,9 @@ const Register = () => {
         // Handle success (e.g., display a success message, redirect, etc.)
         if(response.data.status){
             toast.success(response.data.message);
+            setTimeout(() => {
+                navigate("/login")
+            }, 1000);
         }else{toast.error(response.data.message);}
       } catch (error) {
         console.error('Error submitting form:', error);
