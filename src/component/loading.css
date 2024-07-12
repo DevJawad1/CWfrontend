@@ -109,3 +109,11 @@
     }
   }
   
+  .svgTwo{
+   top: -41vh;   
+  }
+  @media (max-width:600px) {
+    .svgTwo{
+      top: -9.5vh
+    }
+  }

@@ -9,6 +9,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Loading from '../../component/Loading';
 const Login = () => {   
     const navigate= useNavigate()
     const SignUpSchema = Yup.object().shape({
@@ -40,6 +41,7 @@ const Login = () => {
     }
     return (
         <div>
+            {loading?<Loading/>:null}
             {/* <Toplabel/> */}
             <Navbar />
             <div className="d-md-flex register-box">
