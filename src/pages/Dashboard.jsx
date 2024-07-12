@@ -152,9 +152,9 @@ const Dashboard = () => {
         </div>
 
         <div className="fourth-section">
-          <div className="d-md-flex mx-4 m-4">
+          <div className="d-md-flex mx-4 m-4 shadow">
             <div className="col-md-6 px-1">
-              <div className="shadow p-2 rounded">
+              <div className="p-2 rounded div">
                 <div className="form1">
                   <form action="" className='p-4'>
                   <h5>Book Appointment</h5>
@@ -170,8 +170,13 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-6 mt-3 mt-md-0 p-0 px-md-1">
+              <div className=" rounded p-2 ">
               <h5>Recent history</h5>
+              <div>
+                <h6>No history </h6>
+              </div>
+              </div>
             </div>
           </div>
         </div>
