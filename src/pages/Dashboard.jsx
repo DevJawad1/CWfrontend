@@ -1,28 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Bluebackground from '../component/Bluebackground'
 import './dashboard.css'
 import axios from 'axios'
+import Loading from '../component/Loading'
+import GreetingLabel from '../component/GreetingLabel'
 const Dashboard = () => {
-  const getUserDetails= ()=>{
-    axios.post("http://localhost:5000/member/dashboard")
+  const [userDetails, setuserDetails] = useState('')
+  const getUserDetails= async ()=>{
+    let result = await axios.post("http://localhost:5000/member/userDetails", {id:localStorage.cwUser})
+      console.log(result);
+      setuserDetails(result.data.user)
   }
+  useEffect(()=>{
+    getUserDetails()
+  },[])
   return (
     <div>
       <Bluebackground />
       <div className="position-absolute dashboard w-100" style={{ top: "0", zIndex: "2" }}>
-        <div className="d-flex justify-content-between px-3">
-          <div className="p-0 pt-2 col-md-5">
-            <div className="card bg-primary col-2 col-md-1" style={{ height: "50px", borderRadius: "50%" }}></div>
-            <div>
-              <h3 className='greeting text-white pt-3'>Jawad, <br />Welcome to Auto wash</h3>
-            </div>
-          </div>
-          <div className="text-white d-flex pt-2" style={{ gap: "10px" }}>
-            <i class="bi bi-bell-fill"></i>
-            <i class="bi bi-gear-fill"></i>
-          </div>
-        </div>
-
+       <GreetingLabel name={userDetails.firstName} msg={"Welcome to Auto Wsh"}/>
         <div className="d-md-flex w-100 px-3 mt-3 label">
           <div className="col-md-3 mt-2 mt-md-0 px-1">
             <div className="bg-light h-100 rounded p-2 shadow">
