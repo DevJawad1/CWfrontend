@@ -1,7 +1,11 @@
 import React from 'react'
 import Bluebackground from '../component/Bluebackground'
 import './dashboard.css'
+import axios from 'axios'
 const Dashboard = () => {
+  const getUserDetails= ()=>{
+    axios.post("http://localhost:5000/member/dashboard")
+  }
   return (
     <div>
       <Bluebackground />
@@ -45,7 +49,7 @@ const Dashboard = () => {
                   <span class="bi bi-person"></span>
                 </div>
               </div>
-              <h3>No Car</h3>
+              <h3>4 Car</h3>
               <div className="d-flex">
                 <h6 className='text-success'>Upload car </h6>
                 <i class="bi bi-arrow-right-short text-success"></i>

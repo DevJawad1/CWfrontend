@@ -28,6 +28,7 @@ const Login = () => {
         if(response.data.status){
             toast.success(response.data.message);
             setTimeout(() => {
+                localStorage.setItem("cwUser", response.data.loggedInUser)
                 navigate("/dashboard")
             }, 1000);
         }else{toast.error(response.data.message);}
@@ -36,7 +37,9 @@ const Login = () => {
         toast.error(error.message)
       } finally {
         setSubmitting(false);
+        setTimeout(() => {
         setloading(false)
+        }, 2000);
       }
     }
     return (
