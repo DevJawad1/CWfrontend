@@ -22,9 +22,10 @@ const Login = () => {
     const handleSubmit = async (values, { setSubmitting }) => {
         try {
         setloading(true)
-        const response = await axios.post('http://localhost:5000/member/loginMember', values);
+        const response = await axios.post('https://cw-backend-five.vercel.app/member/loginMember', values);
         console.log('Form submitted successfully:', response.data);
         // Handle success (e.g., display a success message, redirect, etc.)
+        
         if(response.data.status){
             toast.success(response.data.message);
             setTimeout(() => {
@@ -44,7 +45,7 @@ const Login = () => {
     }
     return (
         <div>
-            {loading?<Loading/>:null}
+            {loading?<Loading msg={"Login-in"}/>:null}
             {/* <Toplabel/> */}
             <Navbar />
             <div className="d-md-flex register-box">

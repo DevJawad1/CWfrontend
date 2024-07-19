@@ -44,7 +44,7 @@ const Register = () => {
     const handleSubmit = async (values, { setSubmitting }) => {
         try {
         setloading(true)
-        const response = await axios.post('http://localhost:5000/member/register', values);
+        const response = await axios.post('https://cw-backend-five.vercel.app/member/register', values);
         console.log('Form submitted successfully:', response.data);
         // Handle success (e.g., display a success message, redirect, etc.)
         if(response.data.status){
@@ -66,7 +66,7 @@ const Register = () => {
         <div>
             {/* <Toplabel/> */}
             <Navbar />
-            {loading?<Loading/>:null}
+            {loading?<Loading msg={"signing-up"}/>:null}
             <div className="d-md-flex register-box">
             <div className='card col-md-6 p-0 border-0 '>
                 <div className="cover d-flex justify-content-center align-items-center">

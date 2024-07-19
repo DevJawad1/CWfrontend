@@ -10,6 +10,7 @@ import Loading from './component/Loading'
 import { ToastContainer } from 'react-toastify';
 import Dashboard from './pages/Dashboard'
 import Uploadcar from './pages/Uploadcar'
+import Plan from './pages/Plan'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,6 +24,7 @@ function App() {
         <Route path='/loading' element={<Loading/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path='/uploadcar' element={<Uploadcar/>}/>
+        <Route path='/membershipplan' element={<Plan/>}/>
      </Routes>
     </>
   )

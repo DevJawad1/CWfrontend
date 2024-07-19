@@ -1,32 +1,96 @@
-import React, { useState, useEffect } from 'react'
-import Bluebackground from '../component/Bluebackground'
-import axios from 'axios'
-import GreetingLabel from '../component/GreetingLabel'
-import carOne from '../assets/carIcon1.avif'
+import React, { useState, useEffect } from 'react';
+import Bluebackground from '../component/Bluebackground';
+import axios from 'axios';
+import GreetingLabel from '../component/GreetingLabel';
+import carOne from '../assets/carIcon1.avif';
+import Loading from '../component/Loading';
+import { toast, ToastContainer } from 'react-toastify';
+
 const Uploadcar = () => {
-    const [userDetails, setuserDetails] = useState('')
+    const [userDetails, setuserDetails] = useState('');
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [loading, setloading] = useState(false);
+    const [carName, setcarName] = useState('');
+    const [plate, setplate] = useState('');
+    const [color, setcolor] = useState('');
+    const [location, setlocation] = useState('');
+
+    useEffect(()=>{
+        setloading(true)
+        setTimeout(() => {
+            setloading(false)
+        }, 2000);
+    },[])
+
     const getUserDetails = async () => {
-        let result = await axios.post("http://localhost:5000/member/userDetails", { id: localStorage.cwUser })
+        let result = await axios.post("http://localhost:5000/member/userDetails", { id: localStorage.cwUser });
         console.log(result);
-        setuserDetails(result.data.user)
-    }
+        setuserDetails(result.data.user);
+    };
+
+ 
     useEffect(() => {
-        getUserDetails()
-    }, [])
+        getUserDetails();
+    }, []);
+
+    const handleImageChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            setSelectedImage(e.target.files[0]);
+        }
+    };
+
+    const submitDetails = async () => {
+        setloading(true);
+        try {
+            if (!selectedImage) {
+                toast.error("Car image is required");
+            } else {
+                if (carName === "" || plate === "" || color === "" || location === "") {
+                    toast.error("Fill all details");
+                } else {
+                    const formData = new FormData();
+                    formData.append('image', selectedImage);
+                    formData.append('name', carName);
+                    formData.append('plateNum', plate);
+                    formData.append('color', color);
+                    formData.append('location', location);
+                    formData.append('owner', localStorage.cwUser);
+
+                    const saveCar = await axios.post("http://localhost:5000/member/registerCar", formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    });
+                    console.log(saveCar);
+                    toast.success("Car registered successfully!");
+                }
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            toast.error("Failed to register car");
+        } finally {
+            setloading(false);
+        }
+    };
+
     return (
-        <div>
+        <div onClick={() => { loading ? setloading(false) : null }}>
+            {loading && <Loading msg={"Submitting"} />}
             <Bluebackground />
             <div className="position-absolute dashboard w-100" style={{ top: "0", zIndex: "2" }}>
                 <GreetingLabel name={userDetails.firstName} msg={"Start uploading car"} />
                 <div className="d-md-flex gap-0 mt-4">
                     <div className="rounded col-md-3 px-4">
+                        <input type="file" accept="image/*" onChange={handleImageChange} id='getImage' className='d-none' />
                         <h5 className='pt-2 text-white'>Why car image ?</h5>
                         <div className="carImgUpd shadow bg-white p-2 d-flex align-items-center pt-5 pt-md-0" style={{ height: "40vh" }}>
                             <div>
                                 <div className="text-center">
-                                    <img src={carOne} alt="" className='col-7' style={{ border: "1px solid ", borderStyle: "dashed" }} />
+                                    <img src={selectedImage ? URL.createObjectURL(selectedImage) : carOne} alt="" className='col-7' style={{ border: "1px solid", borderStyle: "dashed" }} />
                                     <br />
-                                    <button className='btn mt-2 text-white' style={{ border: "1px solid #84A2CF", backgroundColor: "#0E47A1" }}>Uplaod image <i class="bi bi-plus-lg"></i></button>
+                                    <button className='btn mt-2 text-white' onClick={() => { document.getElementById('getImage').click() }} style={{ border: "1px solid #84A2CF", backgroundColor: "#0E47A1" }}>
+                                        {selectedImage ? "Change image" : "Upload image"} <i className="bi bi-plus-lg"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -34,32 +98,34 @@ const Uploadcar = () => {
                     <div className="rounded col-md-9 p-0 px-3 px-md-2 mt-2 mt-md-0">
                         <h5 className='text-white d-none d-md-block'>Car information</h5>
                         <h5 className='d-md-none text-center'>Car information</h5>
-                        <div className="shadow p-3  bg-white">
-                            <div class="form-floating mb-3">
-                                <span for="floatingInput">Car name</span>
-                                <input type="email" class="form-control" id="floatingInput" placeholder="example:toyota camry" />
+                        <div className="shadow p-3 bg-white">
+                            <div className="form-floating mb-3">
+                                <span htmlFor="floatingInput">Car name</span>
+                                <input type="text" className="form-control" id="floatingInput" placeholder="example:toyota camry" onChange={(e) => setcarName(e.target.value)} />
                             </div>
-                            <div className="d-flex" style={{gap:"10px"}}>
-                                <div class="form-floating mb-3 w-100">
-                                    <span for="floatingInput">Car name</span>
-                                    <input type="email" class="form-control" id="floatingInput" placeholder="example:toyota camry" />
+                            <div className="d-flex" style={{ gap: "10px" }}>
+                                <div className="form-floating mb-3 w-100">
+                                    <span htmlFor="floatingInput">Plate number</span>
+                                    <input type="text" className="form-control" id="floatingInput" placeholder="example:toyota camry" onChange={(e) => setplate(e.target.value)} />
                                 </div>
-                                <div class="form-floating mb-3 w-100">
-                                    <span for="floatingInput">Car name</span>
-                                    <input type="email" class="form-control" id="floatingInput" placeholder="example:toyota camry" />
+                                <div className="form-floating mb-3 w-100">
+                                    <span htmlFor="floatingInput">Color</span>
+                                    <input type="text" className="form-control" id="floatingInput" placeholder="example:toyota camry" onChange={(e) => setcolor(e.target.value)} />
                                 </div>
                             </div>
-                            <div class="form-floating mb-3">
-                                <span for="floatingInput">Car name</span>
-                                <input type="email" class="form-control" id="floatingInput" placeholder="example:toyota camry" />
+                            <div className="form-floating mb-3">
+                                <span htmlFor="floatingInput">Location</span>
+                                <input type="text" className="form-control" id="floatingInput" placeholder="example:toyota camry" onChange={(e) => setlocation(e.target.value)} />
+                            </div>
+                            <div className="submit">
+                                <button className="btn w-100 text-white" style={{ backgroundColor: "#0E47A1" }} onClick={submitDetails}>Submit details</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-    )
-}
+    );
+};
 
-export default Uploadcar
+export default Uploadcar;

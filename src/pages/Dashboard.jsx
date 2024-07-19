@@ -4,10 +4,19 @@ import './dashboard.css'
 import axios from 'axios'
 import Loading from '../component/Loading'
 import GreetingLabel from '../component/GreetingLabel'
+import { useNavigate } from 'react-router-dom'
 const Dashboard = () => {
+  const [loading, setloading] = useState(false)
+  const navigate = useNavigate()
   const [userDetails, setuserDetails] = useState('')
+  useEffect(()=>{
+    setloading(true)
+    setTimeout(() => {
+        setloading(false)
+    }, 2000);
+},[])
   const getUserDetails= async ()=>{
-    let result = await axios.post("http://localhost:5000/member/userDetails", {id:localStorage.cwUser})
+    let result = await axios.post("https://cw-backend-five.vercel.app/member/userDetails", {id:localStorage.cwUser})
       console.log(result);
       setuserDetails(result.data.user)
   }
@@ -16,9 +25,10 @@ const Dashboard = () => {
   },[])
   return (
     <div>
+      {loading?<Loading/>:null}
       <Bluebackground />
       <div className="position-absolute dashboard w-100" style={{ top: "0", zIndex: "2" }}>
-       <GreetingLabel name={userDetails.firstName} msg={"Welcome to Auto Wsh"}/>
+       <GreetingLabel name={userDetails.firstName} msg={"Welcome to Auto Wash"}/>
         <div className="d-md-flex w-100 px-3 mt-3 label">
           <div className="col-md-3 mt-2 mt-md-0 px-1">
             <div className="bg-light h-100 rounded p-2 shadow">
@@ -30,7 +40,7 @@ const Dashboard = () => {
               </div>
               <h3>No plan</h3>
               <div className="d-flex">
-                <h6 className='text-success'>Get plan </h6>
+                <h6 className='text-success'  onClick={()=>{navigate('/membershipplan')}}>Get plan </h6>
                 <i class="bi bi-arrow-right-short text-success"></i>
               </div>
             </div>
@@ -47,7 +57,7 @@ const Dashboard = () => {
               </div>
               <h3>4 Car</h3>
               <div className="d-flex">
-                <h6 className='text-success'>Upload car </h6>
+                <h6 className='text-success' onClick={()=>{navigate('/uploadcar')}}>Upload car </h6>
                 <i class="bi bi-arrow-right-short text-success"></i>
               </div>
             </div>
