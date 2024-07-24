@@ -46,7 +46,6 @@ const Dashboard = () => {
             </div>
           </div>
 
-
           <div className="col-md-3 mt-2 mt-md-0 px-1">
             <div className="bg-light h-100 rounded p-2 shadow">
               <div className="d-flex justify-content-between w-100">
@@ -54,8 +53,8 @@ const Dashboard = () => {
                 <div className="border col-1 d-flex justify-content-center align-items-center bg-primary text-white" style={{ borderRadius: "50%", height: "30px", backgroundColor: "#84A2CF" }}>
                   <span class="bi bi-person"></span>
                 </div>
-              </div>
-              <h3>4 Car</h3>
+              </div>  
+              <h3>No Car</h3>
               <div className="d-flex">
                 <h6 className='text-success' onClick={()=>{navigate('/uploadcar')}}>Upload car </h6>
                 <i class="bi bi-arrow-right-short text-success"></i>
@@ -138,7 +137,7 @@ const Dashboard = () => {
                   </div>
                   <h6 className='pt-2'>View cars</h6>
                 </div>
-                <div className="d-flex align-items-center mt-2" style={{ gap: "10px" }}>
+                <div className="d-flex align-items-center mt-2" style={{ gap: "10px" }} onClick={()=>{navigate('/chooseManagement')}}>
                   <div className="shadow-sm d-flex justify-content-center p-1 px-2" style={{ borderRadius: "50%", height: "35px" }}>
                     <h5 class="bi bi-person-add"></h5>
                   </div>

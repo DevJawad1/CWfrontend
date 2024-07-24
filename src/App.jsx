@@ -11,6 +11,8 @@ import { ToastContainer } from 'react-toastify';
 import Dashboard from './pages/Dashboard'
 import Uploadcar from './pages/Uploadcar'
 import Plan from './pages/Plan'
+import Management from './pages/Management'
+import Bluebackground from './component/Bluebackground'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -25,6 +27,8 @@ function App() {
         <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path='/uploadcar' element={<Uploadcar/>}/>
         <Route path='/membershipplan' element={<Plan/>}/>
+        <Route path='/chooseManagement' element={<Management/>}/>
+        <Route path='/blue' element={<Bluebackground/>}/>
      </Routes>
     </>
   )

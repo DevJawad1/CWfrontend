@@ -114,6 +114,6 @@
   }
   @media (max-width:600px) {
     .svgTwo{
-      top: -9.5vh
+        top: -10vh;
     }
   }
