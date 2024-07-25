@@ -33,6 +33,7 @@ const Uploadcar = () => {
         getUserDetails();
     }, []);
 
+    const [imgFile, setimgFile] = useState('')
     const handleImageChange = (e) => {
         // if (e.target.files && e.target.files[0]) {
         //     setSelectedImage(e.target.files[0]);
@@ -44,6 +45,7 @@ const Uploadcar = () => {
             reader.onload = (event) => {
                 setSelectedImage(event.target.result);
                 // setproductImg(event.target.result)
+                setimgFile(file)
             }
             reader.readAsDataURL(file);
             // if (selectedImage !== "") {
@@ -61,12 +63,13 @@ const Uploadcar = () => {
     useEffect(()=>{
         if (selectedImage){
             const formData = new FormData();
-            formData.append('image', selectedImage);
+            formData.append('file', imgFile);
             axios.post("http://localhost:5000/member/saveCarImg", formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            }).then(response => {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then(response => {
                 console.log('Image saved:', response.data.imageUrl);
             }) .catch(error => {
                 console.error('Error saving image:', error);
