@@ -12,6 +12,7 @@ import Dashboard from './pages/Dashboard'
 import Uploadcar from './pages/Uploadcar'
 import Plan from './pages/Plan'
 import Management from './pages/Management'
+import Mycar from './pages/Mycar'
 import Bluebackground from './component/Bluebackground'
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path='/uploadcar' element={<Uploadcar/>}/>
         <Route path='/membershipplan' element={<Plan/>}/>
         <Route path='/chooseManagement' element={<Management/>}/>
+        <Route path='/mycar' element={<Mycar />}/>
         <Route path='/blue' element={<Bluebackground/>}/>
      </Routes>
     </>

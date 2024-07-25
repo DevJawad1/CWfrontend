@@ -131,7 +131,7 @@ const Dashboard = () => {
                   <h5>Quick links</h5>
                   <h5 class="bi bi-link"></h5>
                 </div>
-                <div className="d-flex align-items-center mt-2" style={{ gap: "10px" }}>
+                <div className="d-flex align-items-center mt-2" style={{ gap: "10px" }} onClick={()=>{navigate('/mycar')}}>
                   <div className="shadow-sm d-flex justify-content-center p-1 px-2" style={{ borderRadius: "50%", height: "35px" }}>
                     <h5 class="bi bi-car-front-fill"></h5>
                   </div>
