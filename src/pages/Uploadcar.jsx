@@ -34,37 +34,87 @@ const Uploadcar = () => {
     }, []);
 
     const handleImageChange = (e) => {
-        if (e.target.files && e.target.files[0]) {
-            setSelectedImage(e.target.files[0]);
+        // if (e.target.files && e.target.files[0]) {
+        //     setSelectedImage(e.target.files[0]);
+        // }
+
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                setSelectedImage(event.target.result);
+                // setproductImg(event.target.result)
+            }
+            reader.readAsDataURL(file);
+            // if (selectedImage !== "") {
+            //     setTimeout(() => {
+            //         setimgpg(true)
+            //     }, 1000);
+            // }
+            // setTimeout(() => {
+            //     setimgpg(false)
+            // }, 1100);
         }
     };
-
+    
+    const [imgResponse, setimgResponse] = useState(false)
+    useEffect(()=>{
+        if (selectedImage){
+            const formData = new FormData();
+            formData.append('image', selectedImage);
+            axios.post("http://localhost:5000/member/saveCarImg", formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            }).then(response => {
+                console.log('Image saved:', response.data.imageUrl);
+            }) .catch(error => {
+                console.error('Error saving image:', error);
+            });
+        }
+        
+    },[selectedImage])
     const submitDetails = async () => {
         setloading(true);
         try {
             if (!selectedImage) {
                 toast.error("Car image is required");
-            } else {
-                if (carName === "" || plate === "" || color === "" || location === "") {
-                    toast.error("Fill all details");
-                } else {
-                    const formData = new FormData();
-                    formData.append('image', selectedImage);
-                    formData.append('name', carName);
-                    formData.append('plateNum', plate);
-                    formData.append('color', color);
-                    formData.append('location', location);
-                    formData.append('owner', localStorage.cwUser);
-
-                    const saveCar = await axios.post("http://localhost:5000/member/registerCar", formData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    });
-                    console.log(saveCar);
-                    toast.success("Car registered successfully!");
-                }
+                setloading(false);
+                return;
             }
+            if (carName === "" || plate === "" || color === "" || location === "") {
+                toast.error("Fill all details");
+                setloading(false);
+                return;
+            }
+
+            const formData = new FormData();
+            // formData.append('image', selectedImage);
+            // formData.append('name', carName);
+            // formData.append('plateNum', plate);
+            // formData.append('color', color);
+            // formData.append('location', location);
+            // formData.append('owner', localStorage.cwUser);
+
+            // Log formData keys and values
+
+            console.log(selectedImage);
+
+            let carObj={
+                image:selectedImage,
+                name:carName,
+                plateNum:plate,
+                location:location,
+                owner:localStorage.cwUser
+            }
+            const saveCar = await axios.post("http://localhost:5000/member/registerCar", carObj, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            console.log(saveCar);
+            toast.success("Car registered successfully!");
         } catch (error) {
             console.error('Error:', error);
             toast.error("Failed to register car");
@@ -86,7 +136,7 @@ const Uploadcar = () => {
                         <div className="carImgUpd shadow bg-white p-2 d-flex align-items-center pt-5 pt-md-0" style={{ height: "40vh" }}>
                             <div>
                                 <div className="text-center">
-                                    <img src={selectedImage ? URL.createObjectURL(selectedImage) : carOne} alt="" className='col-7' style={{ border: "1px solid", borderStyle: "dashed" }} />
+                                    <img src={selectedImage ? selectedImage : carOne} alt="" className='col-7' style={{ border: "1px solid", borderStyle: "dashed" }} />
                                     <br />
                                     <button className='btn mt-2 text-white' onClick={() => { document.getElementById('getImage').click() }} style={{ border: "1px solid #84A2CF", backgroundColor: "#0E47A1" }}>
                                         {selectedImage ? "Change image" : "Upload image"} <i className="bi bi-plus-lg"></i>
@@ -106,7 +156,7 @@ const Uploadcar = () => {
                             <div className="d-flex" style={{ gap: "10px" }}>
                                 <div className="form-floating mb-3 w-100">
                                     <span htmlFor="floatingInput">Plate number</span>
-                                    <input type="text" className="form-control" id="floatingInput" placeholder="example:toyota camry" onChange={(e) => setplate(e.target.value)} />
+                                    <input type="text" style={{textTransform:"uppercase"}} className="form-control" id="floatingInput" placeholder="example:toyota camry" onChange={(e) => setplate(e.target.value)} />
                                 </div>
                                 <div className="form-floating mb-3 w-100">
                                     <span htmlFor="floatingInput">Color</span>

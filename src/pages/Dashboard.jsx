@@ -8,13 +8,13 @@ import { useNavigate } from 'react-router-dom'
 const Dashboard = () => {
   const [loading, setloading] = useState(false)
   const navigate = useNavigate()
-  const [userDetails, setuserDetails] = useState('')
   useEffect(()=>{
     setloading(true)
     setTimeout(() => {
-        setloading(false)
+      setloading(false)
     }, 2000);
-},[])
+  },[])
+  const [userDetails, setuserDetails] = useState('')
   const getUserDetails= async ()=>{
     let result = await axios.post("https://cw-backend-five.vercel.app/member/userDetails", {id:localStorage.cwUser})
       console.log(result);
@@ -28,7 +28,7 @@ const Dashboard = () => {
       {loading?<Loading/>:null}
       <Bluebackground />
       <div className="position-absolute dashboard w-100" style={{ top: "0", zIndex: "2" }}>
-       <GreetingLabel name={userDetails.firstName} msg={"Welcome to Auto Wash"}/>
+       <GreetingLabel msg={"Welcome to Auto Wash"}/>
         <div className="d-md-flex w-100 px-3 mt-3 label">
           <div className="col-md-3 mt-2 mt-md-0 px-1">
             <div className="bg-light h-100 rounded p-2 shadow">

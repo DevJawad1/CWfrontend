@@ -18,7 +18,7 @@ const Plan = () => {
         <div>
             <Bluebackground />
             <div className="position-absolute dashboard w-100" style={{ top: "0", zIndex: "2" }}>
-                <GreetingLabel name={userDetails.firstName} msg={"Choose your plan"} />
+                <GreetingLabel msg={"Choose your plan"} />
                 <div className="">
                     <div className='col-md-10 p-0 mx-auto'>
                         <div className="d-md-flex w-100 px-2 mt-3 label">
