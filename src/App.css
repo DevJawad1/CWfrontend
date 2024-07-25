@@ -1,0 +1,178 @@
+.card20 {
+    position: relative;
+    /* width: 180px; */
+    height: 264px;
+    background-color: #f5f5f5;
+    font-family: "Inter", sans-serif;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  
+  .card20-header {
+    position: relative;
+    height: 120px;
+    background-size: cover;
+    background-position: top;
+    background-image: url(https://images.pexels.com/photos/1090387/pexels-photo-1090387.jpeg?auto=compress&cs=tinysrgb&w=600);
+  }
+  
+  .card20-header:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to top,
+      rgb(155, 70, 20),
+      rgba(181, 181, 181, 0.1)
+    );
+  }
+  
+  .card20-header-bar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  
+  .card20 .btn-message svg {
+    margin-right: 8px;
+    margin-top: 10px;
+    float: right;
+  }
+  
+  .card20 .btn-menu svg {
+    margin-left: 2px;
+    margin-top: 10px;
+  }
+  
+  .card20 svg .polygon {
+    fill: #f5f5f5;
+  }
+  
+  .card20-header-slanted-edge {
+    position: absolute;
+    bottom: -4px;
+    z-index: 1;
+    width: 100%;
+    right: 0;
+    left: 0;
+  }
+  
+  .card20-body {
+    text-align: center;
+    padding-left: 10px;
+  }
+  
+  .card20 .name {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 auto;
+  }
+  
+  .card20 .job-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 4px;
+  }
+  
+  .card20 .bio {
+    font-size: 12px;
+    color: #7b7b7b;
+    font-weight: 300;
+    margin: 4px auto;
+  }
+  
+  .card20-social-accounts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+  }
+  
+  .card20-social-accounts svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .card20-social-accounts a {
+    margin-left: 13px;
+  }
+  
+  .card20-social-accounts a:first-child {
+    margin-left: 0;
+  }
+  .card4-button {
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    margin-left: -10px;
+    padding: 9px 10px;
+    border: none;
+    overflow: hidden;
+    font-size: 16px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0);
+    transition: box-shadow 0.1s ease-in;
+    background-color: #d9d9e9;
+  }
+  
+  .card4-button:active {
+    box-shadow: 0px 0px 15px rgba(0, 119, 255, 0.5);
+  }
+  
+  .card4-button:hover::before {
+    animation: card4-animation2 0.4s 1;
+  }
+  
+  .card4-button::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-99%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    content: "Read more";
+    color: white;
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: #2b2bff;
+    background: linear-gradient(90deg, #5f03f4, #2b2bff, #3838ff, #5f03f4);
+    animation: card4-animation1 10s infinite;
+  }
+  
+  .card4-button:hover::before {
+    transform: translateX(0%);
+  }
+  
+  @keyframes card4-animation1 {
+    0% {
+      transform: translateX(-99%);
+    }
+  
+    25% {
+      transform: translateX(-90%);
+    }
+  
+    50% {
+      transform: translateX(-80%);
+    }
+  
+    75% {
+      transform: translateX(-95%);
+    }
+  
+    100% {
+      transform: translateX(-99%);
+    }
+  }
+  
+  @keyframes card4-animation2 {
+    to {
+      transform: translateX(-1%);
+    }
+  
+    from {
+      transform: translateX(-99%);
+    }
+  }
