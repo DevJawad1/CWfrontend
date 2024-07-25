@@ -7,7 +7,8 @@ const Mycar = () => {
     const [allCar, setallCar] = useState([])
 
     const getAllcar= async()=>{
-        const myCar = await axios.post()
+        const myCar = await axios.post("http://localhost:5000/member/myCar", {user:localStorage.cwUser})
+        console.log(myCar.data);
     }
     useEffect(()=>{
 
