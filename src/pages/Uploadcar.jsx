@@ -95,6 +95,7 @@ const Uploadcar = () => {
                     image:savedImg,
                     name:carName,
                     plateNum:plate,
+                    color:color,
                     location:location,
                     owner:localStorage.cwUser
                 }
