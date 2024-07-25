@@ -59,7 +59,7 @@ const Uploadcar = () => {
         }
     };
     
-    const [imgResponse, setimgResponse] = useState(false)
+    const [savedImg, setsavedImg] = useState('')
     useEffect(()=>{
         if (selectedImage){
             const formData = new FormData();
@@ -71,6 +71,7 @@ const Uploadcar = () => {
             })
             .then(response => {
                 console.log('Image saved:', response.data.imageUrl);
+                setsavedImg(response.data.imageUrl)
             }) .catch(error => {
                 console.error('Error saving image:', error);
             });
@@ -80,7 +81,7 @@ const Uploadcar = () => {
     const submitDetails = async () => {
         setloading(true);
         try {
-            if (!selectedImage) {
+            if (!savedImg) {
                 toast.error("Car image is required");
                 setloading(false);
                 return;
@@ -89,35 +90,24 @@ const Uploadcar = () => {
                 toast.error("Fill all details");
                 setloading(false);
                 return;
-            }
-
-            const formData = new FormData();
-            // formData.append('image', selectedImage);
-            // formData.append('name', carName);
-            // formData.append('plateNum', plate);
-            // formData.append('color', color);
-            // formData.append('location', location);
-            // formData.append('owner', localStorage.cwUser);
-
-            // Log formData keys and values
-
-            console.log(selectedImage);
-
-            let carObj={
-                image:selectedImage,
-                name:carName,
-                plateNum:plate,
-                location:location,
-                owner:localStorage.cwUser
-            }
-            const saveCar = await axios.post("http://localhost:5000/member/registerCar", carObj, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+            }else{
+                let carObj={
+                    image:savedImg,
+                    name:carName,
+                    plateNum:plate,
+                    location:location,
+                    owner:localStorage.cwUser
                 }
-            });
-
-            console.log(saveCar);
-            toast.success("Car registered successfully!");
+                const saveCar = await axios.post("http://localhost:5000/member/registerCar", carObj)
+                console.log(saveCar);
+    
+                console.log(saveCar);
+                if(saveCar.data.status){
+                    toast.success(saveCar.data.message);
+                }else{
+                    toast.error(saveCar.data.message);
+                }
+            }
         } catch (error) {
             console.error('Error:', error);
             toast.error("Failed to register car");
