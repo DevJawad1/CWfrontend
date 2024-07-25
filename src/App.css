@@ -2,12 +2,11 @@
     position: relative;
     /* width: 180px; */
     /* height: px; */
-    background-color: #f5f5f5;
     font-family: "Inter", sans-serif;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  }
-  .card20two{
-    
+}
+.card20two{
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
   }
   .card20-header {
     position: relative;
@@ -47,7 +46,7 @@
   }
   
   .card20 svg .polygon {
-    fill: #f5f5f5;
+    fill: white;
   }
   
   .card20-header-slanted-edge {

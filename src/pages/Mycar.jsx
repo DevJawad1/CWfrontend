@@ -22,15 +22,15 @@ const Mycar = () => {
             <GreetingLabel msg={"View your car "} />
             {/* https://res.cloudinary.com/dog1pqdax/image/upload/v1721897283/iwhjx2wfkplty0zcyok3.png */}
             <div className="position-absolute dashboard w-100" style={{ top: "0", zIndex: "2" }}>
-                <div className="bg-whte p-2 c1 bg-white mx-auto" style={{ marginTop: "150px" }}>
+                <div className="p-2 c1 mx-auto" style={{ marginTop: "150px" }}>
                     <h5 className='text-white'>You can add a new car, edit and delete</h5>
                     {
                         allCar.length > 0 ?
                         <div className='d-md-flex' style={{ flexWrap:"wrap"}}>
                                 {
                                     allCar.map((car, i) => (
-                                        <div className="card20 col-md-3 p-0 mt-3 mt-md-0">
-                                            <div className="p-2 card20two">
+                                        <div className="card20 col-md-3 p-0 p-2">
+                                            <div className="p-2 card20two bg-white mt-1 mt-md-0">
                                             <div className="card20-header" style={{backgroundImage:`url(${car.image})`}}>
                                                 <div className="card20-header-bar">
                                                     <a href="#" className="btn-message">
