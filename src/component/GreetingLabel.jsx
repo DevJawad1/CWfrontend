@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
+import Sidebar from './Sidebar'
 const GreetingLabel = ({name , msg}) => {
   const [userDetails, setuserDetails] = useState('')
   const getUserDetails= async ()=>{
@@ -15,7 +16,10 @@ const GreetingLabel = ({name , msg}) => {
   return (
     <div className="d-flex justify-content-between px-3">
     <div className="p-0 pt-2 col-md-5">
-      <div className="card bg-primary col-2 col-md-1" style={{ height: "50px", borderRadius: "50%" }}></div>
+      {/* <div className="card bg-primary col-2 col-md-1" style={{ height: "50px", borderRadius: "50%" }}></div> */}
+      <div className="col-2 col-md-1">
+      <Sidebar/>
+      </div>
       <div>
         <h3 className='greeting text-white pt-3'>{userDetails.firstName|| "Loading..."}, <br />{msg}</h3>
       </div>
