@@ -95,7 +95,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="shadow p-md-2 pt-2 bg-white mt-4 mx-3 mx-md-4 rounded m-4">
+        <div className="shadow p-md-2 pt-2 bg-white mt-4 mx-md-4 rounded m-3">
           <h5 className='px-2'>Just for you</h5>
           <div className="d-md-flex mt-2">
             <div className="car col-md-6">

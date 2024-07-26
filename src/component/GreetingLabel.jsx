@@ -14,17 +14,17 @@ const GreetingLabel = ({ name, msg }) => {
     // alert(userDetails.firstName)
   }, [])
   return (
-    <div className="px-2 px-md-3">
-      <div className="d-flex justify-content-between ">
+    <div className="">
+      <div className="d-flex justify-content-between position-fixed w-100" style={{top:"0", backgroundColor:"#0E47A1", zIndex:"1"}}>
         <div className="col-2 col-md-1 pt-2">
           <Sidebar />
         </div>
-        <div className="text-white d-flex pt-2" style={{ gap: "10px" }}>
+        <div className="text-white d-flex pt-2 px-3" style={{ gap: "20px", fontSize:"18px" }}>
           <i class="bi bi-bell-fill"></i>
           <i class="bi bi-gear-fill"></i>
         </div>
       </div>
-      <div className="p-0 pt-2 col-md-5">
+      <div className="p-0 col-md-5 mt-4 pt-2">
         <div className='col-12'>
           <h3 className='greeting text-white pt-3'>{userDetails.firstName || "Loading..."}, <br />{msg}</h3>
         </div>

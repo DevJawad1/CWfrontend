@@ -8,7 +8,7 @@ const Sidebar = () => {
                 {/* <i class="bi bi-list"></i> */}
             {/* </a> */}
 
-            <h4 className='text-white bg-primary d-flex justify-content-center col-12' data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+            <h4 className='text-white bg-primary d-flex justify-content-center col-6' data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
                 <i className='bi bi-list ' style={{paddingLeft:"-200px"}}></i>
             </h4>
             {/* p-2 rounded bg-light     */}
