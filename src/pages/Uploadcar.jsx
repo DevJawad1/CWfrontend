@@ -23,7 +23,7 @@ const Uploadcar = () => {
     },[])
 
     const getUserDetails = async () => {
-        let result = await axios.post("http://localhost:5000/member/userDetails", { id: localStorage.cwUser });
+        let result = await axios.post("https://cw-backend-five.vercel.app/member/userDetails", { id: localStorage.cwUser });
         console.log(result);
         setuserDetails(result.data.user);
     };
@@ -64,7 +64,7 @@ const Uploadcar = () => {
         if (selectedImage){
             const formData = new FormData();
             formData.append('file', imgFile);
-            axios.post("http://localhost:5000/member/saveCarImg", formData, {
+            axios.post("https://cw-backend-five.vercel.app/member/saveCarImg", formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -99,7 +99,7 @@ const Uploadcar = () => {
                     location:location,
                     owner:localStorage.cwUser
                 }
-                const saveCar = await axios.post("http://localhost:5000/member/registerCar", carObj)
+                const saveCar = await axios.post("https://cw-backend-five.vercel.app/member/member/registerCar", carObj)
                 console.log(saveCar);
     
                 console.log(saveCar);

@@ -23,7 +23,7 @@
     height: 100%;
     background: linear-gradient(
       to top,
-      rgb(155, 70, 20),
+      rgba(20, 72, 155, 0.799),
       rgba(181, 181, 181, 0.1)
     );
   }

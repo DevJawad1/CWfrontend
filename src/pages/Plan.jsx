@@ -6,7 +6,7 @@ const Plan = () => {
 
     const [userDetails, setuserDetails] = useState('')
     const getUserDetails = async () => {
-        let result = await axios.post("http://localhost:5000/member/userDetails", { id: localStorage.cwUser })
+        let result = await axios.post("http://https://cw-backend-five.vercel.app/member/userDetails", { id: localStorage.cwUser })
         console.log(result);
         setuserDetails(result.data.user)
     }
