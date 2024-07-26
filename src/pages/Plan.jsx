@@ -17,7 +17,9 @@ const Plan = () => {
 
     const generateAccount=(price)=>{
         setplanStatus(price)
-        axios.post()
+        axios.post("http://localhost:4000/member/virtualaccount", {user:localStorage.cwUser, collectAmount:price}).then((response)=>{
+            console.log(response);
+        })
     }
 
     return (
