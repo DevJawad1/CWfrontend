@@ -1,3 +1,6 @@
+body{
+  overflow-y: scroll !important;
+}
 .card20 {
     position: relative;
     /* width: 180px; */

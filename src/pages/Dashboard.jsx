@@ -29,7 +29,7 @@ const Dashboard = () => {
       <Bluebackground />
       <div className="position-absolute dashboard w-100" style={{ top: "0", zIndex: "2" }}>
        <GreetingLabel msg={"Welcome to Auto Wash"}/>
-        <div className="d-md-flex w-100 px-3 mt-3 label">
+        <div className="d-md-flex w-100 px-2 px-md-3 mt-3 xlabel">
           <div className="col-md-3 mt-2 mt-md-0 px-1">
             <div className="bg-light h-100 rounded p-2 shadow">
               <div className="d-flex justify-content-between w-100">
