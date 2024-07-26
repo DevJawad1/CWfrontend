@@ -161,7 +161,7 @@ const Dashboard = () => {
         </div>
 
         <div className="fourth-section">
-          <div className="d-md-flex mx-4 m-4 shadow">
+          <div className="d-md-flex mx-2 mx-md-4 m-3 shadow">
             <div className="col-md-6 px-1">
               <div className="p-2 rounded div">
                 <div className="form1">
