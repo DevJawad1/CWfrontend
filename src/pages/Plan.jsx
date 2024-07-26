@@ -15,6 +15,10 @@ const Plan = () => {
         getUserDetails()
     }, [])
 
+    const generateAccount=(price)=>{
+        setplanStatus(price)
+        axios.post()
+    }
 
     return (
 
@@ -37,7 +41,7 @@ const Plan = () => {
                                             </div>
                                             <h3>₦100</h3>
                                             <div className="d-flex">
-                                                <h6 className='text-success' onClick={() => { setplanStatus(100) }}>Get plan </h6>
+                                                <h6 className='text-success' onClick={() => { generateAccount(100) }}>Get plan </h6>
                                                 <i class="bi bi-arrow-right-short text-success"></i>
                                             </div>
                                         </div>
@@ -54,7 +58,7 @@ const Plan = () => {
                                             </div>
                                             <h3>₦500</h3>
                                             <div className="d-flex">
-                                                <h6 className='text-success' onClick={() => { setplanStatus(500) }}>Get plan</h6>
+                                                <h6 className='text-success' onClick={() => { generateAccount(500) }}>Get plan</h6>
                                                 <i class="bi bi-arrow-right-short text-success"></i>
                                             </div>
                                         </div>
@@ -70,7 +74,7 @@ const Plan = () => {
                                             </div>
                                             <h3>₦1,000</h3>
                                             <div className="d-flex">
-                                                <h6 className='text-success' onClick={() => { setplanStatus(1000) }}>Get plan </h6>
+                                                <h6 className='text-success' onClick={() => { generateAccount(1000) }}>Get plan </h6>
                                                 <i class="bi bi-arrow-right-short text-success"></i>
                                             </div>
                                         </div>
