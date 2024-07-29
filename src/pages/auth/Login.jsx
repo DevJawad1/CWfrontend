@@ -72,7 +72,7 @@ const Login = () => {
                             </div>
                             <div className='w-100 px-md-2 mt-2'>
                                 <span htmlFor="password">Password</span><br />
-                                <div className="d-flex rounded " style={{border:"2px solid #202C45", outline:"none", backgroundColor:"#E8F0FE"}}>
+                                <div className="d-flex rounded align-items-center" style={{border:"2px solid #202C45", outline:"none", backgroundColor:"#E8F0FE"}}>
                                 <Field type={inptype} id="password" name="password" className="w-100 bg-light border-0" style={{height:"50px",  outline:"none"}}/>
                                 <span className='btn col-1 border-0'
                                 onClick={()=>{
@@ -83,7 +83,7 @@ const Login = () => {
                                     }
                                 }}  
                                 >
-                                    <i class={`fs-4 bi ${inptype=="password"?"bi-eye-slash-fill":"bi-eye-fill"} `}></i>
+                                    <i class={`fs-5 bi ${inptype=="password"?"bi-eye-slash-fill":"bi-eye-fill"} `}></i>
                                 </span>
                                 </div>
                             </div>
