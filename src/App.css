@@ -202,6 +202,7 @@ body{
 .loader21 span:nth-child(1) {
   transform: rotate(0deg);
   animation-delay: -0.9s;
+  /* background-color: ; */
 }
 
 .loader21 span:nth-child(2) {

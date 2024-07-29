@@ -14,6 +14,7 @@ import Plan from './pages/Plan'
 import Management from './pages/Management'
 import Mycar from './pages/Mycar'
 import Bluebackground from './component/Bluebackground'
+import Mailformat from './pages/mailformat/Mailformat'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -32,6 +33,7 @@ function App() {
         <Route path='/chooseManagement' element={<Management/>}/>
         <Route path='/mycar' element={<Mycar />}/>
         <Route path='/blue' element={<Bluebackground/>}/>
+        <Route path='/mailformat' element={<Mailformat/>}/>
      </Routes>
     </>
   )
