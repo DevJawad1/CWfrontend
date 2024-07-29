@@ -23,7 +23,7 @@ const Plan = () => {
         setminiloading(true)
         setplanStatus(price)
         // http://localhost:5173/membershipplan
-        axios.post("http://localhost:5000/member/virtualaccount", {userid:localStorage.cwUser, collectAmount:price}).then((response)=>{
+        axios.post("https://cw-backend-five.vercel.app/member/virtualaccount", {userid:localStorage.cwUser, collectAmount:price}).then((response)=>{
             console.log(response);
             setbank(response.data.bank)
             setminiloading(false)
