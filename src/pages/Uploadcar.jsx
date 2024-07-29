@@ -99,7 +99,7 @@ const Uploadcar = () => {
                     location:location,
                     owner:localStorage.cwUser
                 }
-                const saveCar = await axios.post("https://cw-backend-five.vercel.app/member/member/registerCar", carObj)
+                const saveCar = await axios.post("https://cw-backend-five.vercel.app/member/registerCar", carObj)
                 console.log(saveCar);
     
                 console.log(saveCar);

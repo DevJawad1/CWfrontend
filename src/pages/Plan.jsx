@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react'
 import Bluebackground from '../component/Bluebackground'
 import GreetingLabel from '../component/GreetingLabel'
 import axios from 'axios'
+import Miniloading from '../component/Miniloading'
 const Plan = () => {
 
+    const [miniloading, setminiloading] = useState(false)
     const [userDetails, setuserDetails] = useState('')
     const [planStatus, setplanStatus] = useState('')
+
+    const [bank, setbank] = useState('')
     const getUserDetails = async () => {
-        let result = await axios.post("http://https://cw-backend-five.vercel.app/member/userDetails", { id: localStorage.cwUser })
+        let result = await axios.post("https://cw-backend-five.vercel.app/member/userDetails", { id: localStorage.cwUser })
         console.log(result);
         setuserDetails(result.data.user)
     }
@@ -16,9 +20,13 @@ const Plan = () => {
     }, [])
 
     const generateAccount=(price)=>{
+        setminiloading(true)
         setplanStatus(price)
-        axios.post("http://localhost:4000/member/virtualaccount", {user:localStorage.cwUser, collectAmount:price}).then((response)=>{
+        // http://localhost:5173/membershipplan
+        axios.post("http://localhost:5000/member/virtualaccount", {userid:localStorage.cwUser, collectAmount:price}).then((response)=>{
             console.log(response);
+            setbank(response.data.bank)
+            setminiloading(false)
         })
     }
 
@@ -124,19 +132,26 @@ const Plan = () => {
                             </div>
                             <div className='d-md-flex p-0 mx-md-3 mt-1'>
                             <div className='col-12 col-md-6 px-2'>
-                                <div className="bg-white p-4 shadow w-100">
+                                {
+                                    !miniloading?
+                                    <div className="bg-white p-4 shadow w-100">
                                     <h5>Payment </h5>
                                     <div>
                                         <h6> <span className='text-danger'>Note: </span> You are to pay this amount <span className='text-primary fw-semibold'>₦{planStatus}</span> to the account below </h6>
                                         <div className="d-flex align-items-center" style={{gap:"5px"}}>
-                                        <h4>9152280668</h4>
-                                        <h6>Wema bank</h6>
+                                        <h4>{bank.accountNumber|| "loading"}</h4>
+                                        <h6>{bank.bankName|| "loading"}</h6>
                                         </div>
+                                        <h6>Expired in next one hour time : {bank.expire_date}</h6>
                                         <h6>Click the button after you have make payment</h6>
                                         <button className='btn btn-success'>I have paid</button>
                                     </div>
                                 </div>
-
+                                    :
+                                <div className='bg-white p-4 shadow w-100 ' style={{height:"210px"}}>
+                                    <Miniloading msg={"Generating account"}/>
+                                </div>
+                                }
                             </div>
                             <div className='col-12 col-md-6 px-2'>
 
