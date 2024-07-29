@@ -71,7 +71,10 @@ const Login = () => {
                             </div>
                             <div className='w-100 px-md-2 mt-2'>
                                 <span htmlFor="password">Password</span><br />
+                                <div className="d-flex">
                                 <Field type="password" name="password" className="w-100 bg-light rounded" style={{height:"50px", border:"2px solid #202C45", outline:"none"}}/>
+                                <button className='btn col-1'></button>
+                                </div>
                             </div>
                             <h5 className='px-md-2 mt-3'><Link>forgot password ?</Link></h5>
                             <div className="px-0 px-md-2 p-md-0 mt-4 w-100 text-center">

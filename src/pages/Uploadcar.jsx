@@ -119,6 +119,7 @@ const Uploadcar = () => {
 
     return (
         <div onClick={() => { loading ? setloading(false) : null }}>
+            
             {loading && <Loading msg={"Submitting"} />}
             <Bluebackground />
             <div className="position-absolute dashboard w-100" style={{ top: "0", zIndex: "2" }}>
