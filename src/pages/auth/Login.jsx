@@ -43,6 +43,7 @@ const Login = () => {
         }, 2000);
       }
     }
+    const [inptype, setinptype] = useState('password')
     return (
         <div>
             {loading?<Loading msg={"Login-in"}/>:null}
@@ -71,9 +72,19 @@ const Login = () => {
                             </div>
                             <div className='w-100 px-md-2 mt-2'>
                                 <span htmlFor="password">Password</span><br />
-                                <div className="d-flex">
-                                <Field type="password" name="password" className="w-100 bg-light rounded" style={{height:"50px", border:"2px solid #202C45", outline:"none"}}/>
-                                <button className='btn col-1'></button>
+                                <div className="d-flex rounded " style={{border:"2px solid #202C45", outline:"none", backgroundColor:"#E8F0FE"}}>
+                                <Field type={inptype} id="password" name="password" className="w-100 bg-light border-0" style={{height:"50px",  outline:"none"}}/>
+                                <span className='btn col-1 border-0'
+                                onClick={()=>{
+                                    if(inptype=="password"){
+                                        setinptype("text")
+                                    }else{
+                                        setinptype("password")
+                                    }
+                                }}  
+                                >
+                                    <i class={`fs-4 bi ${inptype=="password"?"bi-eye-slash-fill":"bi-eye-fill"} `}></i>
+                                </span>
                                 </div>
                             </div>
                             <h5 className='px-md-2 mt-3'><Link>forgot password ?</Link></h5>

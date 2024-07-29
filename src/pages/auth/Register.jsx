@@ -62,7 +62,8 @@ const Register = () => {
       }
     }
     
-    
+    const [inptype, setinptype] = useState('password')
+    const [inptype2, setinptype2] = useState('password')
     return (
         <div>
             {/* <Toplabel/> */}
@@ -115,12 +116,38 @@ const Register = () => {
                             <div className="d-md-flex mt-2">
                             <div className='w-100 px-md-2'>
                                 <span htmlFor="password">Password</span><br />
-                                <Field type="password" name="password" className="w-100 bg-light rounded" style={{height:"50px", border:touched.password && errors.password ? '2px solid #DC3747' : '2px solid #202C45', outline:"none"}}/>
+                                <div className="d-flex align-items-center rounded" style={{border:touched.password && errors.password ? '2px solid #DC3747' : '2px solid #202C45', backgroundColor:"#E8F0FE"}}>
+                                <Field type={inptype} name="password" className="w-100 bg-light border-0" style={{height:"50px",  outline:"none"}}/>
+                                <span className='btn border-0'
+                                onClick={()=>{
+                                    if(inptype=="password"){
+                                        setinptype("text")
+                                    }else{
+                                        setinptype("password")
+                                    }
+                                }}  
+                                >
+                                    <i class={`fs-5 bi ${inptype=="password"?"bi-eye-slash-fill":"bi-eye-fill"} `}></i>
+                                </span>
+                                </div>
                                 <ErrorMessage name="password" component="div"className='text-danger' />
                             </div>
                             <div className='w-100 px-md-2 mt-2 mt-md-0'>
                                 <span htmlFor="password">Confirm password</span><br />
-                                <input type="password" className="w-100 bg-light rounded" style={{height:"50px", border:"2px solid #202C45", outline:"none"}} />
+                                <div className="d-flex rounded align-items-center" style={{border:"2px solid #202C45", backgroundColor:"#E8F0FE"}}>
+                                <input type={inptype2} className="w-100 bg-light rounded border-0" style={{height:"50px", outline:"none"}} />
+                                <span className='btn border-0'
+                                onClick={()=>{
+                                    if(inptype2=="password"){
+                                        setinptype2("text")
+                                    }else{
+                                        setinptype2("password")
+                                    }
+                                }}  
+                                >
+                                    <i class={`fs-5 bi ${inptype2=="password"?"bi-eye-slash-fill":"bi-eye-fill"} `}></i>
+                                </span>
+                                </div>
                             </div>
 
                             </div>
