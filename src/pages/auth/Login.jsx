@@ -67,12 +67,12 @@ const Login = () => {
                         <Form >
                             <div className='px-md-2 mt-2'>
                                 <span htmlFor="email">Email</span><br />
-                                <Field type="email" name="email" className="w-100 bg-light rounded" style={{height:"50px", border:"2px solid #202C45", outline:"none"}}/>
+                                <Field type="email" name="email" className="w-100 bg-light rounded px-2 px-md-0" style={{height:"50px", border:"2px solid #202C45", outline:"none"}}/>
                                 <ErrorMessage name="email" component="div" />
                             </div>
                             <div className='w-100 px-md-2 mt-2'>
                                 <span htmlFor="password">Password</span><br />
-                                <div className="d-flex rounded align-items-center" style={{border:"2px solid #202C45", outline:"none", backgroundColor:"#E8F0FE"}}>
+                                <div className="d-flex rounded align-items-center px-2 px-md-0" style={{border:"2px solid #202C45", outline:"none", backgroundColor:"#E8F0FE"}}>
                                 <Field type={inptype} id="password" name="password" className="w-100 bg-light border-0" style={{height:"50px",  outline:"none"}}/>
                                 <span className='btn col-1 border-0'
                                 onClick={()=>{
