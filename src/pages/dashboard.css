@@ -18,11 +18,7 @@
       linear-gradient(120deg, transparent 25%, #84A2CF, #0D4399);
     background-origin: padding-box, border-box;
     background-clip: padding-box, border-box;
-  }
-  .form1 form {
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
+
   }
   .form1 input {
     width: 100%;
