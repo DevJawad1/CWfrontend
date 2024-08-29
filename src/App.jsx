@@ -15,6 +15,7 @@ import Management from './pages/Management'
 import Mycar from './pages/Mycar'
 import Bluebackground from './component/Bluebackground'
 import Mailformat from './pages/mailformat/Mailformat'
+import BookCarforWash from './pages/BookCarforWash'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -34,6 +35,8 @@ function App() {
         <Route path='/mycar' element={<Mycar />}/>
         <Route path='/blue' element={<Bluebackground/>}/>
         <Route path='/mailformat' element={<Mailformat/>}/>
+        <Route path='/bookcar' element={<BookCarforWash/>}/>
+
      </Routes>
     </>
   )

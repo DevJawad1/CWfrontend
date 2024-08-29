@@ -3,11 +3,7 @@ import {useNavigate} from 'react-router-dom'
 const Sidebar = () => {
     const navigate = useNavigate()
     return (
-        <div>
-            {/* <a class="btn btn-primary fs-4 p-0 bi bi-list" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" style={{height:"30px"}}> */}
-                {/* <i class="bi bi-list"></i> */}
-            {/* </a> */}
-
+        <div style={{position:"absolute", zIndex:"500"}}>
             <h4 className='text-white bg-primary d-flex justify-content-center col-6' data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
                 <i className='bi bi-list ' style={{paddingLeft:"-200px"}}></i>
             </h4>
@@ -60,6 +56,12 @@ const Sidebar = () => {
                     <h5 class="bi bi-car-front-fill"></h5>
                   </div>
                   <h6 className='pt-2'>Upload car</h6>
+                </div>
+                <div className="d-flex align-items-center mt-2" style={{ gap: "10px" }} onClick={()=>{navigate('/bookcar')}}>
+                  <div className="shadow-sm d-flex justify-content-center p-1 px-2" style={{ borderRadius: "50%", height: "35px" }}>
+                    <h5 class="bi bi-car-front-fill"></h5>
+                  </div>
+                  <h6 className='pt-2'>Book car for wash</h6>
                 </div>
                 <div className="d-flex align-items-center mt-2" style={{ gap: "10px" }} onClick={()=>{navigate('/chooseManagement')}}>
                   <div className="shadow-sm d-flex justify-content-center p-1 px-2" style={{ borderRadius: "50%", height: "35px" }}>

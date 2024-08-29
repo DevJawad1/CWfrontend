@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import GreetingLabel from '../component/GreetingLabel'
 import Bluebackground from '../component/Bluebackground'
@@ -20,8 +20,8 @@ const BookCarforWash = () => {
   return (
     <div>
         <Bluebackground/> 
-        <GreetingLabel msg={"Book car"}/>
         <div className="position-absolute dashboard w-100" style={{ top: "0", zIndex: "2" }}>
+        <GreetingLabel msg={"Book car"}/>
               
         </div>
     </div>

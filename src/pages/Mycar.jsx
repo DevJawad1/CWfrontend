@@ -21,10 +21,9 @@ const Mycar = () => {
     return (
         <div>
             <Bluebackground />
-            <GreetingLabel msg={"View your car "} />
-            {/* https://res.cloudinary.com/dog1pqdax/image/upload/v1721897283/iwhjx2wfkplty0zcyok3.png */}
             <div className="position-absolute dashboard w-100" style={{ top: "0", zIndex: "2" }}>
-                <div className="p-2 c1 mx-auto" style={{ marginTop: "150px" }}>
+            <GreetingLabel msg={"View your car "} />
+                <div className="p-2 c1 mx-auto" style={{ marginTop: "20px" }}>
                     <h5 className='text-white'>You can add a new car, edit and delete</h5>
                     {
                         allCar.length > 0 ?
@@ -61,8 +60,9 @@ const Mycar = () => {
                                                         </a>
                                                     </div>
 
-                                                    <div className="card20-header-slanted-edge">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200">
+                                                    
+                                                    <div className="card20-header-slanted-edge border col-10 " style={{float:"center"}}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200" >
                                                             <path className="polygon" d="M-20,200,1000,0V200Z" />
                                                         </svg>
                                                     </div>
