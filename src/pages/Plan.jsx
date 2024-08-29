@@ -3,8 +3,8 @@ import Bluebackground from '../component/Bluebackground'
 import GreetingLabel from '../component/GreetingLabel'
 import axios from 'axios'
 import Miniloading from '../component/Miniloading'
+import { toast } from 'react-toastify'
 const Plan = () => {
-
     const [miniloading, setminiloading] = useState(false)
     const [userDetails, setuserDetails] = useState('')
     const [planStatus, setplanStatus] = useState('')
@@ -30,6 +30,19 @@ const Plan = () => {
         })
     }
 
+    const verifyPayment = (tx_ref)=>{
+        axios.post("https://cw-backend-five.vercel.app/member/verifyPayment",{tx_ref:tx_ref}).then(response=>{
+            console.log(response)
+            if(response.data.status){
+                toast.success(response.data.msg)
+            }else{
+                toast.error(response.data.msg)
+            }
+            
+        }).catch((err)=>{
+            console.log(err);
+        })
+    }
     return (
 
         <div>
@@ -144,7 +157,7 @@ const Plan = () => {
                                         </div>
                                         <h6>Expired in next one hour time : {bank.expire_date}</h6>
                                         <h6>Click the button after you have make payment</h6>
-                                        <button className='btn btn-success'>I have paid</button>
+                                        <button className='btn btn-success' onClick={()=>{verifyPayment(bank.tx_ref)}}>I have paid</button>
                                     </div>
                                 </div>
                                     :
