@@ -22,7 +22,7 @@ const BookCarforWash = () => {
         <Bluebackground/> 
         <GreetingLabel msg={"Book car"}/>
         <div className="position-absolute dashboard w-100" style={{ top: "0", zIndex: "2" }}>
-                
+              
         </div>
     </div>
   )
