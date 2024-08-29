@@ -20,19 +20,36 @@ const BookCarforWash = () => {
 
     const [oneLocation, setoneLocation] = useState(true)
     const [selectedCars, setselectedCars] = useState([])    
-    const selectCar = (carId) =>{
-        if (!selectedCars.includes(carId)) {
-            setselectedCars([...selectedCars, carId]);
-        } else {
-            setselectedCars(selectedCars.filter(id => id !== carId)); 
+
+    const [carLocationValue, setcarLocationValue] = useState('')
+    const selectCar = (carId, carLocation) =>{
+        let carObj = {
+            carId:carId, 
+            location:carLocation
         }
-        console.log(selectedCars);
+        console.log(carObj);
+        if (!selectedCars.includes(carId)) {
+            setselectedCars([...selectedCars, carObj]);
+        } else {
+            setselectedCars(selectedCars.filter(id => id.carId !== carId)); 
+        }
+        setcarLocationValue(prevValues => ({
+            ...prevValues,
+            [carId]: ''
+        }));
     }
+
+    const handleLocationChange = (carId, location) => {
+        setcarLocationValue(prevValues => ({
+            ...prevValues,
+            [carId]: location
+        }));
+    };
 
 
     const checkSelectedCar = (i) => {
         // console.log(selectedCars);
-        return selectedCars.some((item) => item === i);
+        return selectedCars.some((item) => item.carId === i);
     };
   return (
       <div>
@@ -52,15 +69,26 @@ const BookCarforWash = () => {
             <div className="car-display bookcar d-flex flex-wrap">
                 {
                     allCar.map((car, i)=>(
-                        <div className="col-4 col-md-2 px-md-2 px-1 pt-0 p-0 mt-2 shadow" onClick={()=>{selectCar(car._id)}}>
-                            <div className='p-1 p-2 bg-white rounded'>
+                        <div className="col-6 col-md-3 px-md-2 px-1 pt-0 p-0 mt-2 " >
+                            <div className='p-1 p-2 bg-white rounded shadow'>
                                 <div className="d-flex justify-content-end">
                                 <i class={`bi ${checkSelectedCar(car._id)?"bi-check-circle-fill":"bi-circle"} text-primary`}></i>
                                 </div>
                                 <div className="mt-1 car-img col-12 shadow-sm bg-white rounded " style={{backgroundImage:`url(${car.image})`}}></div>
                                 <h6 className='text-center mt-2 d-none d-md-block' style={{fontSize:"14px"}}> {car.name}</h6>
 
-                                <input type="text" name="" id="" placeholder='input car location' className={`border rounded border-bottom ${}`} style={{outline:"none"}}/>
+                                {
+                                !checkSelectedCar(car._id)?
+                                <div className={`${oneLocation?"d-none":"d-flex"} shadow rounded align-items-cnter p-1`}>
+                                    <input type="text" name="" id="" placeholder='input car location' className={`col-10  p-0 px-2 border-0`} style={{outline:"none"}}value={carLocationValues[car._id] || ''}
+                                    onChange={(e) => handleLocationChange(car._id, e.target.value)}/>
+                                    <div className='col-2 border bi bi-check bg-primary text-white d-flex justify-content-center align-items-center' onClick={()=>{selectCar(car._id, carLocationValue)}}></div>
+                                </div>
+                                :
+                                <div>
+                                    <h6>Selected <i className='bi bi-check-circle-fill text-primary'></i> <br /> Location {selectedCars.map((item =>item.location))}</h6>
+                                </div>
+                                }
                             </div>
                         </div>
                     ))
