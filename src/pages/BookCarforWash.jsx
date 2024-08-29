@@ -80,13 +80,13 @@ const BookCarforWash = () => {
                                 {
                                 !checkSelectedCar(car._id)?
                                 <div className={`${oneLocation?"d-none":"d-flex"} shadow rounded align-items-cnter p-1`}>
-                                    <input type="text" name="" id="" placeholder='input car location' className={`col-10  p-0 px-2 border-0`} style={{outline:"none"}}value={carLocationValues[car._id] || ''}
+                                    <input type="text" name="" id="" placeholder='input car location' className={`col-10  p-0 px-2 border-0`} style={{outline:"none"}} value={carLocationValue[car._id] || ''}
                                     onChange={(e) => handleLocationChange(car._id, e.target.value)}/>
                                     <div className='col-2 border bi bi-check bg-primary text-white d-flex justify-content-center align-items-center' onClick={()=>{selectCar(car._id, carLocationValue)}}></div>
                                 </div>
                                 :
                                 <div>
-                                    <h6>Selected <i className='bi bi-check-circle-fill text-primary'></i> <br /> Location {selectedCars.map((item =>item.location))}</h6>
+                                    <h6>Selected <i className='bi bi-check-circle-fill text-primary'></i> <br /> Location {selectedCars.find(car => car.carId === car._id)?.location || 'N/A'}</h6>
                                 </div>
                                 }
                             </div>
