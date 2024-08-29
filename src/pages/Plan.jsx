@@ -32,7 +32,6 @@ const Plan = () => {
 
     const verifyPayment = (tx_ref)=>{
         axios.post("https://cw-backend-five.vercel.app/member/verifyPayment",{tx_ref:tx_ref}).then(response=>{
-            console.log(response)
             if(response.data.status){
                 toast.success(response.data.msg)
             }else{
