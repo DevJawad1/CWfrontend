@@ -61,11 +61,11 @@ const Mycar = () => {
                                                     </div>
 
                                                     
-                                                    <div className="card20-header-slanted-edge border col-10 " style={{float:"center"}}>
+                                                    {/* <div className="card20-header-slanted-edge col-10 text-end" style={{float:"center"}}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200" >
                                                             <path className="polygon" d="M-20,200,1000,0V200Z" />
                                                         </svg>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
 
                                                 <div className="card20-body mt-3">
