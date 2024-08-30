@@ -29,7 +29,7 @@ const Mycar = () => {
                         allCar.length > 0 ?
                             <div className='d-md-flex' style={{ flexWrap: "wrap" }}>
                                 {
-                                    allCar.map((car, i) => (
+                                    allCar.slice().reverse().map((car, i) => (
                                         <div className="card20 col-md-3 p-0 p-2">
                                             <div className="p-2 card20two bg-white mt-1 mt-md-0">
                                                 <div className="card20-header" style={{ backgroundImage: `url(${car.image})` }}>

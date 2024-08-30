@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import GreetingLabel from '../component/GreetingLabel'
 import Bluebackground from '../component/Bluebackground'
+import {toast} from 'react-toastify'
 import './bookcar.css'
 const BookCarforWash = () => {
     const [allCar, setallCar] = useState([])
@@ -27,10 +28,14 @@ const BookCarforWash = () => {
         console.log(carLocation)    
         let carObj = {
             carId:carId, 
-            location:oneLocation?carLocationValue:carLocation[id]
+            location:carLocation[id]
         }
         console.log(carObj);
-        selectCarPushingHandle(carObj, carId)
+        if(!carLocation[id]){
+            toast.error("Enter the car location")
+        }else{
+            selectCarPushingHandle(carObj, carId)
+        }
         console.log(selectedCars)
 
         
@@ -40,14 +45,18 @@ const BookCarforWash = () => {
         }));
 
     }
-
     const selectCar2=(carId)=>{
         let carObj = {
             carId:carId, 
             location:carLocationValue
         }
 
-        selectCarPushingHandle(carObj, carId)
+        if(carLocationValue==""){
+            toast.error("Enter the car location")
+        }else{
+            selectCarPushingHandle(carObj, carId)
+        }
+        
     }
 
 
@@ -86,14 +95,14 @@ const BookCarforWash = () => {
             <h5 className='text-white'>Select the car you are washing, you can select more than one car for wash   </h5>
             <div className="d-flex align-items-center gap-2">
                 <h6 className='text-white'>Are your car in same location ? </h6>
-                <h6 className='shadow p-1 bg-white rounded' onClick={()=>{setoneLocation(true), setselectedCars([])}}>Yes</h6>
-                <h6 className='shadow p-1 bg-white rounded' onClick={()=>{setoneLocation(false), setselectedCars([])}}>No</h6>
+                <h6 className={`shadow p-1 rounded ${oneLocation?"bg-primary text-white":"bg-white"}`} onClick={()=>{setoneLocation(true), setselectedCars([])}}>Yes</h6>
+                <h6 className={`shadow p-1 rounded ${!oneLocation?"bg-primary text-white":"bg-white"}`} onClick={()=>{setoneLocation(false), setselectedCars([])}}>No</h6>
             </div>
 
             <input type="text" onChange={(e) => setcarLocationValue(e.target.value)} className={`border-0 shadow rounded px-2 ${oneLocation?"":"d-none"}`} placeholder='Enter all car location' style={{outline:"none", height:"40px"}}/>
             <div className="car-display bookcar d-flex flex-wrap">
                 {
-                    allCar.map((car, i)=>(
+                    allCar.slice().reverse().map((car, i)=>(
                         <div className="col-6 col-md-3 px-md-2 px-1 pt-0 p-0 mt-2 " >
                             <div className='p-1 p-2 bg-white rounded shadow' onClick={oneLocation?()=>{selectCar2(car._id, carLocationValue)}:null}>
                                 <div className="d-flex justify-content-end">
