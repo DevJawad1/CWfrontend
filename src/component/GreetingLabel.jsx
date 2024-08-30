@@ -5,7 +5,7 @@ const GreetingLabel = ({ name, msg }) => {
   const [userDetails, setuserDetails] = useState('')
   const getUserDetails = async () => {
     let result = await axios.post("https://cw-backend-five.vercel.app/member/userDetails", { id: localStorage.cwUser })
-    console.log(result);
+    // console.log(result);
     setuserDetails(result.data.user)
   }
 
