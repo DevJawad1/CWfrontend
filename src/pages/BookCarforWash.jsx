@@ -1,9 +1,9 @@
 import axios from 'axios'
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import GreetingLabel from '../component/GreetingLabel'
 import Bluebackground from '../component/Bluebackground'
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 import './bookcar.css'
 const BookCarforWash = () => {
     const [allCar, setallCar] = useState([])
@@ -20,55 +20,55 @@ const BookCarforWash = () => {
     }, [])
 
     const [oneLocation, setoneLocation] = useState(true)
-    const [selectedCars, setselectedCars] = useState([])    
+    const [selectedCars, setselectedCars] = useState([])
 
     const [carLocationValue, setcarLocationValue] = useState('')
-    const selectCar = (carId, carLocation,) =>{
-        let id= carId
-        console.log(carLocation)    
+    const selectCar = (carId, carLocation,) => {
+        let id = carId
+        console.log(carLocation)
         let carObj = {
-            carId:carId, 
-            location:carLocation[id]
+            carId: carId,
+            location: carLocation[id]
         }
         console.log(carObj);
-        if(!carLocation[id]){
+        if (!carLocation[id]) {
             toast.error("Enter the car location")
-        }else{
+        } else {
             selectCarPushingHandle(carObj, carId)
         }
         console.log(selectedCars)
 
-        
+
         setcarLocationValue(prevValues => ({
             ...prevValues,
             [carId]: ''
         }));
 
     }
-    const selectCar2=(carId)=>{
+    const selectCar2 = (carId) => {
         let carObj = {
-            carId:carId, 
-            location:carLocationValue
+            carId: carId,
+            location: carLocationValue
         }
 
-        if(carLocationValue==""){
+        if (carLocationValue == "") {
             toast.error("Enter the car location")
-        }else{
+        } else {
             selectCarPushingHandle(carObj, carId)
         }
-        
+
     }
 
 
-    const selectCarPushingHandle=(carObj, carId)=>{
-        if(selectedCars.length==0){
+    const selectCarPushingHandle = (carObj, carId) => {
+        if (selectedCars.length == 0) {
             setselectedCars([...selectedCars, carObj]);
         }
-        selectedCars.map((item, i)=>{
+        selectedCars.map((item, i) => {
             if (item.carId !== carId) {
                 setselectedCars([...selectedCars, carObj]);
             } else {
-                setselectedCars(selectedCars.filter(id => id.carId !== carId)); 
+                setselectedCars(selectedCars.filter(id => id.carId !== carId));
             }
 
         })
@@ -85,61 +85,61 @@ const BookCarforWash = () => {
         // console.log(selectedCars);
         return selectedCars.some((item) => item.carId === i);
     };
-  return (
-      <div>
-        <Bluebackground/> 
-        <div className="position-absolute dashboard w-100" style={{ top: "0", zIndex: "2" }}>
-            <GreetingLabel msg={"Book car"}/>
+    return (
+        <div>
+            <Bluebackground />
+            <div className="position-absolute dashboard w-100" style={{ top: "0", zIndex: "2" }}>
+                <GreetingLabel msg={"Book car"} />
 
-            <div className="p-2 px-3">
-            <h5 className='text-white'>Select the car you are washing, you can select more than one car for wash   </h5>
-            <div className="d-flex align-items-center gap-2">
-                <h6 className='text-white'>Are your car in same location ? </h6>
-                <h6 className={`shadow p-1 rounded ${oneLocation?"bg-primary text-white":"bg-white"}`} onClick={()=>{setoneLocation(true), setselectedCars([])}}>Yes</h6>
-                <h6 className={`shadow p-1 rounded ${!oneLocation?"bg-primary text-white":"bg-white"}`} onClick={()=>{setoneLocation(false), setselectedCars([])}}>No</h6>
-            </div>
+                <div className="p-2 px-3">
+                    <h5 className='text-white'>Select the car you are washing, you can select more than one car for wash   </h5>
+                    <div className="d-flex align-items-center gap-2">
+                        <h6 className='text-white'>Are your car in same location ? </h6>
+                        <h6 className={`shadow p-1 rounded ${oneLocation ? "bg-primary text-white" : "bg-white"}`} onClick={() => { setoneLocation(true), setselectedCars([]) }}>Yes</h6>
+                        <h6 className={`shadow p-1 rounded ${!oneLocation ? "bg-primary text-white" : "bg-white"}`} onClick={() => { setoneLocation(false), setselectedCars([]) }}>No</h6>
+                    </div>
 
-            <input type="text" onChange={(e) => setcarLocationValue(e.target.value)} className={`border-0 shadow rounded px-2 ${oneLocation?"":"d-none"}`} placeholder='Enter all car location' style={{outline:"none", height:"40px"}}/>
-            <div className="car-display bookcar border p-0 px-0 d-flex flex-wrap justify-content-cente">
-                {
-                    allCar.slice().reverse().map((car, i)=>(
-                        <div className="col-6 col-md-3 px-md-2 px-1 pt-0 p-0 mt-2 " >
-                            <div className='p-1 p-2 bg-white rounded shadow' onClick={oneLocation?()=>{selectCar2(car._id, carLocationValue)}:null}>
-                                <div className="d-flex justify-content-end">
-                                <i class={`bi ${checkSelectedCar(car._id)?"bi-check-circle-fill":"bi-circle"} text-primary`}></i>
-                                </div>
-                                <div className="mt-1 car-img col-12 shadow-sm bg-white rounded " style={{backgroundImage:`url(${car.image})`}}></div>
-                                <h6 className='text-center mt-2 d-none d-md-block' style={{fontSize:"14px"}}> {car.name}</h6>
+                    <input type="text" onChange={(e) => setcarLocationValue(e.target.value)} className={`border-0 shadow rounded px-2 ${oneLocation ? "" : "d-none"}`} placeholder='Enter all car location' style={{ outline: "none", height: "40px" }} />
 
-                                {
-                                !checkSelectedCar(car._id) ?
-                                <div className={`${oneLocation?"d-none":"d-flex"} shadow rounded align-items-cnter p-1`}>
-                                    <input type="text" name="" id="" placeholder='input car location' className={`col-10  p-0 px-2 border-0`} style={{outline:"none"}} value={carLocationValue[car._id] || ''}
-                                    onChange={(e) => handleLocationChange(car._id, e.target.value)}/>
+                </div>
+                    <div className="car-display bookcar p-0 px-md-2 d-flex flex-wrap">
+                        {
+                            allCar.slice().reverse().map((car, i) => (
+                                <div className="col-6 col-md-3 px-md-2 px-1 pt-0 p-0 mt-2" >
+                                    <div className='p-1 p-md-2 bg-white rounded shadow' onClick={oneLocation ? () => { selectCar2(car._id, carLocationValue) } : null}>
+                                        <div className="d-flex justify-content-end">
+                                            <i class={`bi ${checkSelectedCar(car._id) ? "bi-check-circle-fill" : "bi-circle"} text-primary`}></i>
+                                        </div>
+                                        <div className="mt-1 car-img col-12 shadow-sm bg-white rounded " style={{ backgroundImage: `url(${car.image})` }}></div>
+                                        <h6 className='text-center mt-2 d-none d-md-block' style={{ fontSize: "14px" }}> {car.name}</h6>
 
-                                    <div className='col-2 border bi bi-check bg-primary text-white d-flex justify-content-center align-items-center' onClick={()=>{selectCar(car._id, carLocationValue)}}></div>
-                                </div>
-                                :
-                                <div>
-                                    <div className={`shadow-sm p-1 ${oneLocation?"":"d-md-flex"} justify-content-between`}>
-                                        <h6>Selected <i className='bi bi-check-circle-fill text-primary'></i> <br /> Location: {selectedCars.map(eachcar => eachcar.carId === car._id ? eachcar.location:"") || 'N/A'}</h6>
-                                        <h6 className='text-danger' 
-                                        onClick={()=>{setselectedCars(selectedCars.filter(id => id.carId !== car._id)); }}
-                                        style={{cursor:"pointer"}}><i class="bi bi-trash"></i> Remove</h6>
+                                        {
+                                            !checkSelectedCar(car._id) ?
+                                                <div className={`${oneLocation ? "d-none" : "d-flex"} rounded border border-primary align-items-cnter mt-2`} style={{height:"30px"}}>
+                                                    <input type="text" name="" id="" placeholder='input car location' className={`col-10  p-0 px-2 border-0`} style={{ outline: "none", fontsize:"1px" }} value={carLocationValue[car._id] || ''}
+                                                    onChange={(e) => handleLocationChange(car._id, e.target.value)} />
+
+                                                    <div className='col-2 border bi bi-check bg-primary text-white d-flex justify-content-center align-items-center' onClick={() => { selectCar(car._id, carLocationValue) }}></div>
+                                                </div>
+                                                :
+                                                <div>
+                                                    <div className={`shadow-sm p-1 ${oneLocation ? "" : "d-md-flex"} justify-content-between`}>
+                                                        <h6>Selected <i className='bi bi-check-circle-fill text-primary'></i> <br /> Location: {selectedCars.map(eachcar => eachcar.carId === car._id ? eachcar.location : "") || 'N/A'}</h6>
+                                                        <h6 className='text-danger'
+                                                            onClick={() => { setselectedCars(selectedCars.filter(id => id.carId !== car._id)); }}
+                                                            style={{ cursor: "pointer" }}><i class="bi bi-trash"></i> Remove</h6>
+                                                    </div>
+
+                                                </div>
+                                        }
                                     </div>
-
                                 </div>
-                                }
-                            </div>
-                        </div>
-                    ))
-                }
-            </div>
-
+                            ))
+                        }
+                    </div>
             </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default BookCarforWash
