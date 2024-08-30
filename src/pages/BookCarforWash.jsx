@@ -23,9 +23,11 @@ const BookCarforWash = () => {
 
     const [carLocationValue, setcarLocationValue] = useState('')
     const selectCar = (carId, carLocation) =>{
+        let id= carId
+        // console.log(carLocation[id])
         let carObj = {
             carId:carId, 
-            location:carLocation
+            location:carLocation[id]
         }
         console.log(carObj);
         if (!selectedCars.includes(carId)) {
@@ -37,6 +39,8 @@ const BookCarforWash = () => {
             ...prevValues,
             [carId]: ''
         }));
+
+        console.log(selectedCars)
     }
 
     const handleLocationChange = (carId, location) => {
@@ -86,7 +90,13 @@ const BookCarforWash = () => {
                                 </div>
                                 :
                                 <div>
-                                    <h6>Selected <i className='bi bi-check-circle-fill text-primary'></i> <br /> Location {selectedCars.find(car => car.carId === car._id)?.location || 'N/A'}</h6>
+                                    <div className={`shadow-sm p-1 ${oneLocation?"d-none":"d-flex"} justify-content-between`}>
+                                        <h6>Selected <i className='bi bi-check-circle-fill text-primary'></i> <br /> Location: {selectedCars.map(eachcar => eachcar.carId === car._id ? eachcar.location:"") || 'N/A'}</h6>
+                                        <h6 className='text-danger' 
+                                        onClick={()=>{setselectedCars(selectedCars.filter(id => id.carId !== car._id)); }}
+                                        style={{cursor:"pointer"}}><i class="bi bi-trash"></i> Remove</h6>
+                                    </div>
+
                                 </div>
                                 }
                             </div>
