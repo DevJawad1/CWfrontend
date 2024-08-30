@@ -115,11 +115,11 @@ const BookCarforWash = () => {
 
                                         {
                                             !checkSelectedCar(car._id) ?
-                                                <div className={`${oneLocation ? "d-none" : "d-flex"} rounded border border-primary mt-2`} style={{height:"30px"}}>
-                                                    <input type="text" name="" id="" placeholder='Car location' className={`col-10 p-0 px-1 border-0 rounded`} style={{ outline: "none", fontSize:"15px" }} value={carLocationValue[car._id] || ''}
+                                                <div className={`${oneLocation ? "d-none" : "d-flex"} rounded border border-primary mt-2 justify-content-between`} style={{height:"30px"}}>
+                                                    <input type="text" name="" id="" placeholder='Enter car location' className={`col-10 p-0 px-1 border-0 rounded`} style={{ outline: "none", fontSize:"13px" }} value={carLocationValue[car._id] || ''}
                                                     onChange={(e) => handleLocationChange(car._id, e.target.value)} />
 
-                                                    <div className='col-2 bi bi-check bg-primary text-white d-flex justify-content-center align-items-center' onClick={() => { selectCar(car._id, carLocationValue) }}></div>
+                                                    <div className=' bi bi-check rounded bg-primary text-white d-flex justify-content-center align-items-center' onClick={() => { selectCar(car._id, carLocationValue) }} style={{width:"25px"}}></div>
                                                 </div>
                                                 :
                                                 <div>
