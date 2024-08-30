@@ -100,7 +100,7 @@ const BookCarforWash = () => {
             </div>
 
             <input type="text" onChange={(e) => setcarLocationValue(e.target.value)} className={`border-0 shadow rounded px-2 ${oneLocation?"":"d-none"}`} placeholder='Enter all car location' style={{outline:"none", height:"40px"}}/>
-            <div className="car-display bookcar d-flex flex-wrap justify-content-cente">
+            <div className="car-display bookcar border p-0 px-0 d-flex flex-wrap justify-content-cente">
                 {
                     allCar.slice().reverse().map((car, i)=>(
                         <div className="col-6 col-md-3 px-md-2 px-1 pt-0 p-0 mt-2 " >
