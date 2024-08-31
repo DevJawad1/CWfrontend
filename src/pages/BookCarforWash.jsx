@@ -114,8 +114,8 @@ const BookCarforWash = () => {
 
                 </div>
 
-                <div className='position-fixed w-100 text-end submit-car-booked px-3' style={{zIndex:"1"}}>
-                    <button className='btn btn-primary shadow '>Submit</button>
+                <div className='position-fixe w-100 text-end submit-car-booked px-3' style={{zIndex:"1"}}>
+                    <button className='btn btn-primary shadow '>Submit car</button>
                 </div>
                     <div className="car-display bookcar p-0 px-md-2 d-flex flex-wrap">
                         {
