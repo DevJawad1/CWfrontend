@@ -48,9 +48,3 @@
     transform: translate(-50%,-50%);
   }
   
-  @media (max-width: 600px) {
-    .loader3 {
-      animation-duration: 3.5s;
-    }
-  }
-  
