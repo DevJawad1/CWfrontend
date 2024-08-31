@@ -93,7 +93,7 @@ const Mycar = () => {
                                 }
                             </div>
                             : <NocarFound/>
-                            :null
+                            :<NocarFound load={true}/>
                     }
                 </div>
             </div>

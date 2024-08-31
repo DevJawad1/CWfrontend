@@ -154,7 +154,7 @@ const BookCarforWash = () => {
                                     </div>
                                 ))
                                 : <NocarFound />
-                            : null
+                            : <NocarFound load={true}/>
                     }
                 </div>
             </div>
