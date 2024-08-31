@@ -95,12 +95,16 @@ const BookCarforWash = () => {
                     <h5 className='text-white'>Select the car you are washing, you can select more than one car for wash   </h5>
                     <div className="d-flex align-items-center gap-2">
                         <h6 className='text-white'>Are your car in same location ? </h6>
-                        <h6 className={`shadow p-1 rounded ${oneLocation ? "bg-primary text-white" : "bg-white"}`} onClick={() => { setoneLocation(true), setselectedCars([]) }}>Yes</h6>
-                        <h6 className={`shadow p-1 rounded ${!oneLocation ? "bg-primary text-white" : "bg-white"}`} onClick={() => { setoneLocation(false), setselectedCars([]) }}>No</h6>
+                        <h6 className={`shadow p-1 rounded ${oneLocation ? "bg-primary text-white" : "bg-white"}`} onClick={() => { setoneLocation(true) }}>Yes</h6>
+                        <h6 className={`shadow p-1 rounded ${!oneLocation ? "bg-primary text-white" : "bg-white"}`} onClick={() => { setoneLocation(false)  }}>No</h6>
                     </div>
 
                     <input type="text" onChange={(e) => setcarLocationValue(e.target.value)} className={`border-0 shadow rounded px-2 ${oneLocation ? "" : "d-none"}`} placeholder='Enter all car location' style={{ outline: "none", height: "40px" }} />
 
+                </div>
+
+                <div className='position-fixed w-100 text-end submit-car-booked px-3' style={{zIndex:"1"}}>
+                    <button className='btn btn-primary shadow '>Submit</button>
                 </div>
                     <div className="car-display bookcar p-0 px-md-2 d-flex flex-wrap">
                         {
@@ -119,7 +123,7 @@ const BookCarforWash = () => {
                                                     <input type="text" name="" id="" placeholder='Enter car location' className={`col-10 p-0 px-1 border-0 rounded`} style={{ outline: "none", fontSize:"13px" }} value={carLocationValue[car._id] || ''}
                                                     onChange={(e) => handleLocationChange(car._id, e.target.value)} />
 
-                                                    <div className=' bi bi-check rounded bg-primary text-white d-flex justify-content-center align-items-center' onClick={() => { selectCar(car._id, carLocationValue) }} style={{width:"25px"}}></div>
+                                                    <div className=' bi bi-check rounded border border-primary bg-primary text-white d-flex justify-content-center align-items-center' onClick={() => { selectCar(car._id, carLocationValue) }} style={{width:"25px"}}></div>
                                                 </div>
                                                 :
                                                 <div>

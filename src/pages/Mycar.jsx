@@ -2,8 +2,8 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Bluebackground from '../component/Bluebackground'
 import GreetingLabel from '../component/GreetingLabel'
-import noCarImg from '../assets/nocarImg.jpg'
 import { useNavigate } from 'react-router-dom'
+import NocarFound from '../component/NocarFound'
 
 const Mycar = () => {
     const [allCar, setallCar] = useState([])
@@ -81,14 +81,7 @@ const Mycar = () => {
                                     ))
                                 }
                             </div>
-                            : <div className='bg-white mx-auto m-4 m-md-0 p-4 shadow'>
-                                <h6>You have not upload any car</h6>
-                                <img src={noCarImg} alt="" className='card col-md-2' />
-                                <div className="d-flex pt-2 justify-content-end" onClick={()=>{navigate('/uploadcar')}}>
-                                    <h6 className='text-success'>Start uploading </h6>
-                                    <i class="bi bi-arrow-right-short text-success"></i>
-                                </div>
-                            </div>
+                            : <NocarFound/>
                     }
                 </div>
             </div>
