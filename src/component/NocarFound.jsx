@@ -1,7 +1,9 @@
 import React from 'react'
 import noCarImg from '../assets/nocarImg.jpg'
+import { useNavigate } from 'react-router-dom'
 
 const NocarFound = ({ load }) => {
+    const navigate = useNavigate()
     return (
         <div className='col-12'>
             {
