@@ -1,5 +1,8 @@
 .general-car-loader{
-    background-color: rgba(0, 0, 0, 0.38);
+    background-color: rgba(0, 0, 0, 0.578);
+    top: 0;
+    height: 100vh;
+    z-index: 10;
 }
 .loader2 {
     animation: l6 1s 1 cubic-bezier(0,0.2,1,1);

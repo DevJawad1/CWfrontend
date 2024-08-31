@@ -4,16 +4,21 @@ import Bluebackground from '../component/Bluebackground'
 import GreetingLabel from '../component/GreetingLabel'
 import { useNavigate } from 'react-router-dom'
 import NocarFound from '../component/NocarFound'
+import CarLoading from '../component/CarLoading'
 
 const Mycar = () => {
     const [allCar, setallCar] = useState([])
+    const [loading, setloading] = useState(true)
+    const [Miniloading, setMiniloading] = useState(false)
     const navigate = useNavigate()
     const getAllcar = async () => {
+        setMiniloading(true)
         const myCar = await axios.post("https://cw-backend-five.vercel.app/member/myCar", { user: localStorage.cwUser })
         console.log(myCar.data);
         if (myCar.data.status) {
             setallCar(myCar.data.myCar)
         }
+        setMiniloading(false)
     }
     useEffect(() => {
         getAllcar()
@@ -21,11 +26,17 @@ const Mycar = () => {
     return (
         <div>
             <Bluebackground />
+            {
+                Miniloading?
+                <CarLoading msg={"Loading car"}/>
+                :null
+            }
             <div className="position-absolute dashboard w-100" style={{ top: "0", zIndex: "2" }}>
             <GreetingLabel msg={"View your car "} />
                 <div className="p-2 c1 mx-auto" style={{ marginTop: "20px" }}>
                     <h5 className='text-white'>You can add a new car, edit and delete</h5>
                     {
+                        
                         allCar.length > 0 ?
                             <div className='d-md-flex' style={{ flexWrap: "wrap" }}>
                                 {
