@@ -12,7 +12,7 @@ const NocarFound = ({ load }) => {
                         <h6>Fething your car</h6>
                         <div className="d-flex pt-1 justify-content-end" onClick={() => { navigate('/uploadcar') }}>
                             <h6 className='text-success'>Wait a moment </h6>
-                            <i className="bi bi-person-raised-hand"></i>
+                            <i className="bi bi-person-raised-hand text-success"></i>
                         </div>
                     </div>
                     :<div className='bg-white mx-auto m-4 m-md-0 p-4 shadow '>
