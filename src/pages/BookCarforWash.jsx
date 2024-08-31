@@ -119,6 +119,7 @@ const BookCarforWash = () => {
                 </div>
                     <div className="car-display bookcar p-0 px-md-2 d-flex flex-wrap">
                         {
+                            !Miniloading?
                             allCar.slice().reverse().map((car, i) => (
                                 <div className="col-6 col-md-3 px-md-2 px-1 pt-0 p-0 mt-2" >
                                     <div className='p-1 p-md-2 bg-white rounded shadow' onClick={oneLocation ? () => { selectCar2(car._id, carLocationValue) } : null}>
@@ -150,6 +151,7 @@ const BookCarforWash = () => {
                                     </div>
                                 </div>
                             ))
+                            :null
                         }
                     </div>
             </div>

@@ -36,7 +36,7 @@ const Mycar = () => {
                 <div className="p-2 c1 mx-auto" style={{ marginTop: "20px" }}>
                     <h5 className='text-white'>You can add a new car, edit and delete</h5>
                     {
-                        
+                       !Miniloading? 
                         allCar.length > 0 ?
                             <div className='d-md-flex' style={{ flexWrap: "wrap" }}>
                                 {
@@ -93,6 +93,7 @@ const Mycar = () => {
                                 }
                             </div>
                             : <NocarFound/>
+                            :null
                     }
                 </div>
             </div>
