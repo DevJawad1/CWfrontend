@@ -11,7 +11,7 @@ const NocarFound = ({ load }) => {
                     <div className='bg-white mx-auto m-4 m-md-0 p-4 shadow'>
                         <h6>Fething your car</h6>
                         <div className="d-flex pt-2 justify-content-end" onClick={() => { navigate('/uploadcar') }}>
-                            <h6 className='text-success'>Start uploading </h6>
+                            <h6 className='text-success'>Wait a moment </h6>
                             <i class="bi bi-arrow-right-short text-success"></i>
                         </div>
                     </div>
