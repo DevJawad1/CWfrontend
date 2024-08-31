@@ -5,12 +5,18 @@ import GreetingLabel from '../component/GreetingLabel'
 import Bluebackground from '../component/Bluebackground'
 import { toast } from 'react-toastify'
 import './bookcar.css'
+import CarLoading from '../component/CarLoading'
 const BookCarforWash = () => {
     const [allCar, setallCar] = useState([])
+    const [Miniloading, setMiniloading] = useState(false)
     const navigate = useNavigate()
     const getAllcar = async () => {
+        setMiniloading(true)
         const myCar = await axios.post("https://cw-backend-five.vercel.app/member/myCar", { user: localStorage.cwUser })
         console.log(myCar.data);
+        if(myCar){
+            setMiniloading(false)
+        }
         if (myCar.data.status) {
             setallCar(myCar.data.myCar)
         }
@@ -88,6 +94,11 @@ const BookCarforWash = () => {
     return (
         <div>
             <Bluebackground />
+            {
+                Miniloading?
+                <CarLoading msg={"Getting your car"}/>
+                :null
+            }
             <div className="position-absolute dashboard w-100" style={{ top: "0", zIndex: "2" }}>
                 <GreetingLabel msg={"Book car"} />
 
