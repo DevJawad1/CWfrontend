@@ -12,7 +12,7 @@ const NocarFound = ({ load }) => {
                         <h6>Fething your car</h6>
                         <div className="d-flex pt-2 justify-content-end" onClick={() => { navigate('/uploadcar') }}>
                             <h6 className='text-success'>Wait a moment </h6>
-                            <i class="bi bi-arrow-right-short text-success"></i>
+                            <i className="bi bi-person-raised-hand"></i>
                         </div>
                     </div>
                     :<div className='bg-white mx-auto m-4 m-md-0 p-4 shadow '>
@@ -20,7 +20,7 @@ const NocarFound = ({ load }) => {
                             <img src={noCarImg} alt="" className='card col-md-2' />
                             <div className="d-flex pt-2 justify-content-end" onClick={() => { navigate('/uploadcar') }}>
                                 <h6 className='text-success'>Start uploading </h6>
-                                <i class="bi bi-arrow-right-short text-success"></i>
+                                <i className="bi bi-arrow-right-short text-success"></i>
                             </div>
                     </div>
             }
