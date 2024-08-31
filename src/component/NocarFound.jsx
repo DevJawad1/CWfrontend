@@ -8,9 +8,9 @@ const NocarFound = ({ load }) => {
         <div className='col-12'>
             {
                 load ?
-                    <div className='bg-white mx-auto m-4 m-md-0 p-2 pt-4 shadow d-flex justify-content-center gap-3'>
-                        <h6>Fething your car</h6>
-                        <div className="d-flex justify-content-end align-item-center" onClick={() => { navigate('/uploadcar') }}>
+                    <div className='bg-white mx-auto m-4 m-md-0 p-2 pt-3 shadow gap-3'>
+                        <h6 className='text-center'>Fething your car</h6>
+                        <div className="d-flex pt-0 justify-content-center align-item-center" onClick={() => { navigate('/uploadcar') }}>
                             <h6 className='text-success'>Wait a moment </h6>
                             <i className="bi bi-person-raised-hand text-success"></i>
                         </div>
