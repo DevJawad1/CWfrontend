@@ -92,10 +92,9 @@ const BookCarforWash = () => {
         // console.log(selectedCars);
         return selectedCars.some((item) => item.carId === i);
     };
-
-
     const submitBookedCar=()=>{
-        selectedCars.length<1?toast.error("No car selected. Select the car you are washing"):null
+        selectedCars.length<1?toast.error("No car selected. Select the car you are washing"):
+        axios.post('https://cw-backend-five.vercel.app/member/savebookcar', { user: localStorage.cwUser , allcars:selectedCars})
     }
     return (
         <div>
@@ -106,7 +105,7 @@ const BookCarforWash = () => {
                     : null
             }
             <div className="position-absolute dashboard w-100" style={{ top: "0", zIndex: "2" }}>
-                <GreetingLabel msg={"Book car"} />
+                <GreetingLabel msg={"Book car"}  />
 
                 <div className="p-2 px-3">
                     <h5 className='text-white'>Select the car you are washing, you can select more than one car for wash   </h5>
