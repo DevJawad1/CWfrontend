@@ -95,7 +95,7 @@ const BookCarforWash = () => {
     const submitBookedCar=()=>{
         selectedCars.length<1?toast.error("No car selected. Select the car you are washing"):
         axios.post('https://cw-backend-five.vercel.app/member/savebookcar', { user: localStorage.cwUser , allcars:selectedCars}).then((response)=>{
-            response.data.status?toast.success(response.data.msg):toast.error((response.data.msg))
+            response.data.status?toast.success(response.data.msg):toast.error(response.data.msg)
         }).catch((err)=>{
             toast.error(err)
         })
