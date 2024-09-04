@@ -24,8 +24,8 @@ const Dashboard = () => {
     getUserDetails()
   },[])
   return (
-    <div>
-      {loading?<Loading/>:null}
+    <div className='c'>
+      {/* {loading?<Loading/>:null} */}
       <Bluebackground />
       <div className="position-absolute dashboard w-100" style={{ top: "0", zIndex: "2" }}>
        <GreetingLabel msg={"Welcome to Auto Wash"}/>
