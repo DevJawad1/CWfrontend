@@ -92,6 +92,11 @@ const BookCarforWash = () => {
         // console.log(selectedCars);
         return selectedCars.some((item) => item.carId === i);
     };
+
+
+    const submitBookedCar=()=>{
+        selectedCars.length<1?toast.error("No car selected. Select the car you are washing"):null
+    }
     return (
         <div>
             <Bluebackground />
@@ -115,8 +120,8 @@ const BookCarforWash = () => {
 
                 </div>
 
-                <div className='position-fixe w-100 text-end submit-car-booked px-3' style={{ zIndex: "1" }}>
-                    <button className='btn btn-primary shadow '>Submit booked car ({selectedCars.length})</button>
+                <div className='position-fixe w-100 text-end submit-car-booked px-3' style={{ zIndex: "1", display:allCar.length>0?"block":"none" }}>
+                    <button className='btn btn-primary shadow ' onClick={submitBookedCar}>Submit booked car ({selectedCars.length})</button>
                 </div>
                 <div className="car-display bookcar p-0 px-md-2 d-flex flex-wrap">
                     {

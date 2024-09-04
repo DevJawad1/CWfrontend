@@ -18,6 +18,7 @@ import Mailformat from './pages/mailformat/Mailformat'
 import BookCarforWash from './pages/BookCarforWash'
 import Miniloading from './component/Miniloading'
 import CarLoading from './component/CarLoading'
+import SidebarTwo from './component/SidebarTwo'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -39,6 +40,7 @@ function App() {
         <Route path='/mailformat' element={<Mailformat/>}/>
         <Route path='/bookcar' element={<BookCarforWash/>}/>
         <Route path='/carload' element={<CarLoading/>}/>
+        <Route path='/sidebar' element={<SidebarTwo/>}/>
 
      </Routes>
     </>
