@@ -1,5 +1,6 @@
 .sidebar-box{
     width: 22vw;
+    height: 100vh;
 }
 .sidebar-box .name-value{
     font-size: 15px;
