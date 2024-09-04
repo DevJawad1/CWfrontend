@@ -8,27 +8,38 @@ import { useNavigate } from 'react-router-dom'
 const Dashboard = () => {
   const [loading, setloading] = useState(false)
   const navigate = useNavigate()
-  useEffect(()=>{
+  useEffect(() => {
     setloading(true)
     setTimeout(() => {
       setloading(false)
     }, 2000);
-  },[])
+  }, [])
   const [userDetails, setuserDetails] = useState('')
-  const getUserDetails= async ()=>{
-    let result = await axios.post("https://cw-backend-five.vercel.app/member/userDetails", {id:localStorage.cwUser})
-      console.log(result);
-      setuserDetails(result.data.user)
+  const getUserDetails = async () => {
+    let result = await axios.post("https://cw-backend-five.vercel.app/member/userDetails", { id: localStorage.cwUser })
+    console.log(result);
+    setuserDetails(result.data.user)
   }
-  useEffect(()=>{
+
+  const [allCar, setallCar] = useState([])
+  const getAllcar = async () => {
+    const myCar = await axios.post("https://cw-backend-five.vercel.app/member/myCar", { user: localStorage.cwUser })
+    if (myCar.data.status) {
+      setallCar(myCar.data.myCar)
+    }
+
+  }
+
+  useEffect(() => {
     getUserDetails()
-  },[])
+    getAllcar()
+  }, [])
   return (
     <div className='c'>
       {/* {loading?<Loading/>:null} */}
       <Bluebackground />
       <div className="position-absolute dashboard w-100" style={{ top: "0", zIndex: "2" }}>
-       <GreetingLabel msg={"Welcome to Auto Wash"}/>
+        <GreetingLabel msg={"Welcome to Auto Wash"} />
         <div className="d-md-flex w-100 px-2 px-md-3 mt-3 xlabel">
           <div className="col-md-3 mt-2 mt-md-0 px-1">
             <div className="bg-light h-100 rounded p-2 shadow">
@@ -38,9 +49,13 @@ const Dashboard = () => {
                   <span class="bi bi-person"></span>
                 </div>
               </div>
-              <h3>No plan</h3>
+              <h3>{userDetails.type !== "" ? <span style={{ textTransform: "capitalize" }}>{userDetails.type} class</span> : "No plan"}</h3>
               <div className="d-flex">
-                <h6 className='text-success'  onClick={()=>{navigate('/membershipplan')}}>Get plan </h6>
+                <h6 className='text-success' onClick={() => { navigate('/membershipplan') }}>
+                  {
+                    userDetails.type !== "" && userDetails.type !== "First" ? "Upgrade plan" : "Get plan"
+                  }
+                </h6>
                 <i class="bi bi-arrow-right-short text-success"></i>
               </div>
             </div>
@@ -53,10 +68,10 @@ const Dashboard = () => {
                 <div className="border col-1 d-flex justify-content-center align-items-center bg-primary text-white" style={{ borderRadius: "50%", height: "30px", backgroundColor: "#84A2CF" }}>
                   <span class="bi bi-person"></span>
                 </div>
-              </div>  
-              <h3>No Car</h3>
+              </div>
+              <h3>{allCar.length == 0 ? "No car" : `${allCar.length} ${allCar.length > 1 ? "cars" : "car"}`}</h3>
               <div className="d-flex">
-                <h6 className='text-success' onClick={()=>{navigate('/uploadcar')}}>Upload car </h6>
+                <h6 className='text-success' onClick={() => { navigate('/uploadcar') }}>Upload car </h6>
                 <i class="bi bi-arrow-right-short text-success"></i>
               </div>
             </div>
@@ -106,22 +121,24 @@ const Dashboard = () => {
                 </div>
                 <div className="car-list">
                   {/* <p>You have no car</p> */}
-                  <div className="d-flex justify-content-between border-bottom mt-2 bg-ligh p-1 pt-2">
-                    <h6>Toyora camry</h6>
-                    <i class="bi bi-pencil-square"></i>
-                  </div>
-                  <div className="d-flex justify-content-between border-bottom mt- bg-ligh p-1 pt-2">
-                    <h6>Lexus 350</h6>
-                    <i class="bi bi-pencil-square"></i>
-                  </div>
-                  <div className="d-flex justify-content-between border-bottom mt- bg-ligh p-1 pt-2">
-                    <h6>Lexus 350</h6>
-                    <i class="bi bi-pencil-square"></i>
-                  </div>
-                  <div className="d-flex justify-content-between border-bottom mt- bg-ligh p-1 pt-2">
-                    <h6>Lexus 350</h6>
-                    <i class="bi bi-pencil-square"></i>
-                  </div>
+
+                  {
+                    allCar.length > 1 ?
+                      allCar.map((car, i) => (
+                        i < 3 ?
+                          <div className="d-flex justify-content-between border-bottom mt-2 bg-ligh p-1 pt-2">
+                            <h6>{car.name}</h6>
+                            <i class="bi bi-pencil-square"></i>
+                          </div>
+                          : null
+                      ))
+                      : null
+                  }
+                  {allCar.length > 3 ?
+                    <div className="d-flex mt-2">
+                      <h6 className='text-success'>View all </h6>
+                      <i class="bi bi-arrow-right-short text-success"></i>
+                    </div> : null}
                 </div>
               </div>
             </div>
@@ -131,13 +148,13 @@ const Dashboard = () => {
                   <h5>Quick links</h5>
                   <h5 class="bi bi-link"></h5>
                 </div>
-                <div className="d-flex align-items-center mt-2" style={{ gap: "10px" }} onClick={()=>{navigate('/mycar')}}>
+                <div className="d-flex align-items-center mt-2" style={{ gap: "10px" }} onClick={() => { navigate('/mycar') }}>
                   <div className="shadow-sm d-flex justify-content-center p-1 px-2" style={{ borderRadius: "50%", height: "35px" }}>
                     <h5 class="bi bi-car-front-fill"></h5>
                   </div>
                   <h6 className='pt-2'>My cars</h6>
                 </div>
-                <div className="d-flex align-items-center mt-2" style={{ gap: "10px" }} onClick={()=>{navigate('/chooseManagement')}}>
+                <div className="d-flex align-items-center mt-2" style={{ gap: "10px" }} onClick={() => { navigate('/chooseManagement') }}>
                   <div className="shadow-sm d-flex justify-content-center p-1 px-2" style={{ borderRadius: "50%", height: "35px" }}>
                     <h5 class="bi bi-person-add"></h5>
                   </div>
@@ -161,30 +178,13 @@ const Dashboard = () => {
         </div>
 
         <div className="fourth-section">
-          <div className="d-md-flex mx-2 mx-md-4 m-3 shadow">
-            <div className="col-md-6 px-1">
-              <div className="p-2 rounded div">
-                <div className="form1">
-                  <form action="" className='p-4'>
-                  <h5>Book Appointment</h5>
-                    <div className="inputBox mt-3">
-                      <input id="form1-name" required type="text" className=''/>
-                      <label htmlFor="form1-name">Name</label>
-                    </div>
-                    <div className="" style={{float:"right"}}>
-                    <button type="submit" className='mt-2'>Book now</button>
-
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
+          <div className="mx-2 mx-md-4 m-3 shadow">
             <div className="col-md-6 mt-3 mt-md-0 p-0 px-md-1">
               <div className=" rounded p-2 ">
-              <h5>Recent history</h5>
-              <div>
-                <h6>No history </h6>
-              </div>
+                <h5>Payment history</h5>
+                <div>
+                  <h6>No history </h6>
+                </div>
               </div>
             </div>
           </div>

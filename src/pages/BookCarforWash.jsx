@@ -131,7 +131,7 @@ const BookCarforWash = () => {
                         !Miniloading ?
                             allCar.length > 0 ?
                                 allCar.slice().reverse().map((car, i) => (
-                                    <div className="col-6 col-md-3 px-md-2 px-1 pt-0 p-0 mt-2" >
+                                    <div className="col-6 col-md-3 px-md-1 px-1 pt-0 p-0 mt-2" >
                                         <div className='p-1 p-md-2 bg-white rounded shadow' onClick={oneLocation ? () => { selectCar2(car._id, carLocationValue) } : null}>
                                             <div className="d-flex justify-content-end">
                                                 <i class={`bi ${checkSelectedCar(car._id) ? "bi-check-circle-fill" : "bi-circle"} text-primary`}></i>

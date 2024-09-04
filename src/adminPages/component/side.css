@@ -1,0 +1,12 @@
+.sidebar-box{
+    width: 22vw;
+}
+.sidebar-box .name-value{
+    font-size: 15px;
+}
+
+@media (max-width:600px) {
+    .sidebar-box{
+        width: 80vw;
+    }
+}

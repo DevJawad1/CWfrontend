@@ -7,10 +7,10 @@ import NocarFound from '../component/NocarFound'
 import CarLoading from '../component/CarLoading'
 
 const Mycar = () => {
-    const [allCar, setallCar] = useState([])
     const [loading, setloading] = useState(true)
     const [Miniloading, setMiniloading] = useState(false)
     const navigate = useNavigate()
+    const [allCar, setallCar] = useState([])
     const getAllcar = async () => {
         setMiniloading(true)
         const myCar = await axios.post("https://cw-backend-five.vercel.app/member/myCar", { user: localStorage.cwUser })

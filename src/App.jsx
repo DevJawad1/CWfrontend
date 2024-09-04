@@ -19,6 +19,7 @@ import BookCarforWash from './pages/BookCarforWash'
 import Miniloading from './component/Miniloading'
 import CarLoading from './component/CarLoading'
 import SidebarTwo from './component/SidebarTwo'
+import Admindashboard from './adminPages/Admindashboard'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -41,8 +42,9 @@ function App() {
         <Route path='/bookcar' element={<BookCarforWash/>}/>
         <Route path='/carload' element={<CarLoading/>}/>
         <Route path='/sidebar' element={<SidebarTwo/>}/>
-
+        <Route path='/staff/admin' element={<Admindashboard/>}/>
      </Routes>
+
     </>
   )
 }
