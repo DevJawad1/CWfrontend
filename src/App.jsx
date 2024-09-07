@@ -20,6 +20,8 @@ import Miniloading from './component/Miniloading'
 import CarLoading from './component/CarLoading'
 import SidebarTwo from './component/SidebarTwo'
 import Admindashboard from './adminPages/Admindashboard'
+import AdminProfile from './adminPages/Profile'
+import Addadmin from './adminPages/Addadmin'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -43,6 +45,8 @@ function App() {
         <Route path='/carload' element={<CarLoading/>}/>
         <Route path='/sidebar' element={<SidebarTwo/>}/>
         <Route path='/staff/admin' element={<Admindashboard/>}/>
+        <Route path='/staff/profile' element={<AdminProfile/>}/>
+        <Route path='/staff/addAdmin' element={<Addadmin/>}/>
      </Routes>
 
     </>

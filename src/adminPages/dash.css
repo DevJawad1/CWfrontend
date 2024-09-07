@@ -8,3 +8,14 @@
     width: 100%;
     height: 25vh;
 }
+.admindash .flip-box{
+}
+.admindash .flip-box .flip1{
+    transition: all 0.3s ease;
+    width: 330px;
+}
+
+.admindash .flip-box .flip2{
+    transition: all 0.3s ease;
+    width: 330px;
+}

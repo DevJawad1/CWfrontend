@@ -49,11 +49,11 @@ const Dashboard = () => {
                   <span class="bi bi-person"></span>
                 </div>
               </div>
-              <h3>{userDetails.type !== "" ? <span style={{ textTransform: "capitalize" }}>{userDetails.type} class</span> : "No plan"}</h3>
+              <h3>{userDetails.type !== "" ? <span style={{ textTransform: "capitalize" }}>{userDetails.type|| "Loding"} {userDetails.type!=="none"?"class":null}</span> : "No plan"}</h3>
               <div className="d-flex">
                 <h6 className='text-success' onClick={() => { navigate('/membershipplan') }}>
                   {
-                    userDetails.type !== "" && userDetails.type !== "First" ? "Upgrade plan" : "Get plan"
+                    userDetails.type == "none"?"Get plan" : userDetails.type !== "First" ? "Upgrade plan" : "Get plan"
                   }
                 </h6>
                 <i class="bi bi-arrow-right-short text-success"></i>
