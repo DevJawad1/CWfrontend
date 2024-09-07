@@ -68,12 +68,14 @@ const Admindashboard = () => {
                                     </div>
 
                                     <div className="d-flex gap-1 w-100">
-                                        {carOwned.map(([owner, type, count]) => (
+                                        {carOwned.map(([owner, type, count], i) => (
+                                            i<=1?
                                             <div className="shadow-sm rounded col-6 p-2" key={owner}>
                                                     <h6>{owner}</h6>
                                                     <h6>Booked {count} cars</h6>
                                                     {type} class
-                                                </div>
+                                            </div>
+                                            :null
                                         ))}
                                         {/* <li key={owner}>{owner} has {count} cars.</li> */}
                                         {/* <div className="shadow-sm rounded col-6 p-2">
