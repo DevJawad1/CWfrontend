@@ -18,12 +18,14 @@ const Plan = () => {
     useEffect(() => {
         getUserDetails()
     }, [])
-
+    
+    const [loadingtype, setloadingtype] = useState('')
     const generateAccount=(price)=>{
         setminiloading(true)
         setplanStatus(price)
+        setloadingtype("Generating account")
         // http://localhost:5173/membershipplan
-        axios.post("https://cw-backend-five.vercel.app/member/virtualaccount", {userid:localStorage.cwUser, collectAmount:price}).then((response)=>{
+        axios.post("https://cw-backend-five.vercel.app/member/virtualaccount", {userid:localStorage.cwUser, collectAmount:price, planType:"Get membership"}).then((response)=>{
             console.log(response);
             setbank(response.data.bank)
             setminiloading(false)
@@ -31,7 +33,10 @@ const Plan = () => {
     }
 
     const verifyPayment = (tx_ref)=>{
+        setminiloading(true)
+        setloadingtype("Verifying Payment")
         axios.post("https://cw-backend-five.vercel.app/member/verifyPayment",{tx_ref:tx_ref}).then(response=>{
+            setminiloading(false)
             if(response.data.status){
                 toast.success(response.data.msg)
             }else{
@@ -68,7 +73,7 @@ const Plan = () => {
                                             </div>
                                         </div>
                                     </div>
-
+                                    {/* https://www.addic7ed.com/movie/177395 */}
 
                                     <div className="w-100 mt-2 mt-md-0 px-1">
                                         <div className="bg-light h-100 rounded p-2 shadow">
@@ -161,7 +166,7 @@ const Plan = () => {
                                 </div>
                                     :
                                 <div className='bg-white p-4 shadow w-100 ' style={{height:"210px"}}>
-                                    <Miniloading msg={"Generating account"}/>
+                                    <Miniloading msg={loadingtype}/>
                                 </div>
                                 }
                             </div>
