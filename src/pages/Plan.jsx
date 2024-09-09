@@ -35,7 +35,7 @@ const Plan = () => {
     const verifyPayment = (tx_ref)=>{
         setminiloading(true)
         setloadingtype("Verifying Payment")
-        axios.post("https://cw-backend-five.vercel.app/member/verifyPayment",{tx_ref:tx_ref}).then(response=>{
+        axios.post("https://cw-backend-five.vercel.app/member/verifyPayment",{tx_ref:tx_ref, userid:localStorage.cwUser}).then(response=>{
             setminiloading(false)
             if(response.data.status){
                 toast.success(response.data.msg)
@@ -51,7 +51,7 @@ const Plan = () => {
     
     const [stopFunction, setStopFunction]= useState(false)
     const verifyPayment2=(tx_ref)=>{
-        axios.post("https://cw-backend-five.vercel.app/member/verifyPayment",{tx_ref:tx_ref}).then(response=>{
+        axios.post("https://cw-backend-five.vercel.app/member/verifyPayment",{tx_ref:tx_ref, userid:localStorage.cwUser}).then(response=>{
             if(response.data.status){
                 toast.success(response.data.msg)
                 setStopFunction(true)

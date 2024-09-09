@@ -30,6 +30,10 @@ const Dashboard = () => {
 
   }
 
+  const getUserPayment=()=>{
+    
+  }
+
   useEffect(() => {
     getUserDetails()
     getAllcar()
