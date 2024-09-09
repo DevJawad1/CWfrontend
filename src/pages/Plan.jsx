@@ -47,6 +47,20 @@ const Plan = () => {
             console.log(err);
         })
     }
+
+    
+    const [stopFunction, setStopFunction]= useState(false)
+    const verifyPayment2=(tx_ref)=>{
+        axios.post("https://cw-backend-five.vercel.app/member/verifyPayment",{tx_ref:tx_ref}).then(response=>{
+            if(response.data.status){
+                toast.success(response.data.msg)
+                setStopFunction(true)
+            }
+            
+        }).catch((err)=>{
+            console.log(err);
+        })    
+    }
     return (
 
         <div>
@@ -61,6 +75,7 @@ const Plan = () => {
                                     <div className="w-100 mt-2 mt-md-0 px-1">
                                         <div className="bg-light h-100 rounded p-2 shadow">
                                             <div className="d-flex justify-content-between w-100">
+                                         
                                                 <h6>No special feature</h6>
                                                 <div className="border col-1 d-flex justify-content-center align-items-center bg-primary text-white" style={{ borderRadius: "50%", height: "30px", backgroundColor: "#84A2CF" }}>
                                                     <span class="bi bi-person"></span>
@@ -161,7 +176,11 @@ const Plan = () => {
                                         </div>
                                         <h6>Expired in next one hour time : {bank.expire_date}</h6>
                                         <h6>Click the button after you have make payment</h6>
-                                        <button className='btn btn-success' onClick={()=>{verifyPayment(bank.tx_ref)}}>I have paid</button>
+
+                                        <div className="d-flex justify-content-between">
+                                            <button className='btn btn-success' onClick={()=>{verifyPayment(bank.tx_ref)}}>I have paid</button>
+                                            <button className='btn btn-success ' style={{visibility:"hidden"}} onClick={!stopFunction?verifyPayment2(bank.tx_ref):null}>I have paid</button>
+                                        </div>
                                     </div>
                                 </div>
                                     :
