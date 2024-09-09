@@ -197,13 +197,13 @@ const Dashboard = () => {
 
         <div className="fourth-section">
           <div className={`mx-2 mx-md-4 m-3 shadow`}>
-            <div className="mt-3 mt-md-0 p-0 px-md-1">
+            <div className="mt-3 mt-md-0 p-0 px-md-2 pt-md-3">
               <div className=" rounded p-2 ">
                 <h5>Payment history</h5>
                 <div className={` ${paymentHistory.length>0?"sm-scroll":null}`}>
                   {
                     paymentHistory.length > 0 ?
-                      <table class="table table-striped text-center">
+                      <table class="table table-striped border text-center">
                         <tr>
                           <th>#</th>
                           <th>Amount</th>
@@ -215,7 +215,7 @@ const Dashboard = () => {
                         {
                           paymentHistory.slice().reverse().map((item, i) => (
                             i<5?
-                            <tr className={i % 2 == 0 && i !== 0 ? "bg-light" : null}>
+                            <tr className={i % 2 == 1 || i==0 ? "bg-light" : null}>
                               <td>{i + 1}</td>
                               <td>{item.transactionDetails.data.amount}</td>
                               <td>{item.paymentType}</td>
