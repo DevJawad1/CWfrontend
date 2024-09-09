@@ -30,14 +30,28 @@ const Dashboard = () => {
 
   }
 
-  const getUserPayment=()=>{
-    
+  const [paymentHistory, setpaymentHistory] = useState([])
+  const getUserPayment = () => {
+    axios.post("https://cw-backend-five.vercel.app/member/userPayment", { userId: localStorage.cwUser }).then((res => {
+      setpaymentHistory(res.data.paymentHistory)
+      console.log(res.data.paymentHistory);
+    })).catch((err) => {
+      console.log("f", err);
+    })
   }
 
   useEffect(() => {
     getUserDetails()
     getAllcar()
+    getUserPayment()
   }, [])
+
+  const dueDate = (realDate) => {
+    let date = new Date(realDate);
+    date.setDate(date.getDate() + 30);
+    let formattedDate = date.toISOString().split('T')[0];
+    return formattedDate
+  }
   return (
     <div className='c'>
       {/* {loading?<Loading/>:null} */}
@@ -53,11 +67,11 @@ const Dashboard = () => {
                   <span class="bi bi-person"></span>
                 </div>
               </div>
-              <h3>{userDetails.type !== "" ? <span style={{ textTransform: "capitalize" }}>{userDetails.type|| "Loding"} {userDetails.type!=="none"?"class":null}</span> : "No plan"}</h3>
+              <h3>{userDetails.type !== "" ? <span style={{ textTransform: "capitalize" }}>{userDetails.type || "Loding"} {userDetails.type !== "none" ? "class" : null}</span> : "No plan"}</h3>
               <div className="d-flex">
                 <h6 className='text-success' onClick={() => { navigate('/membershipplan') }}>
                   {
-                    userDetails.type == "none"?"Get plan" : userDetails.type !== "First" ? "Upgrade plan" : "Get plan"
+                    userDetails.type == "none" ? "Get plan" : userDetails.type !== "First" ? "Upgrade plan" : "Get plan"
                   }
                 </h6>
                 <i class="bi bi-arrow-right-short text-success"></i>
@@ -182,12 +196,40 @@ const Dashboard = () => {
         </div>
 
         <div className="fourth-section">
-          <div className="mx-2 mx-md-4 m-3 shadow">
-            <div className="col-md-6 mt-3 mt-md-0 p-0 px-md-1">
+          <div className={`mx-2 mx-md-4 m-3 shadow`}>
+            <div className="mt-3 mt-md-0 p-0 px-md-1">
               <div className=" rounded p-2 ">
                 <h5>Payment history</h5>
-                <div>
-                  <h6>No history </h6>
+                <div className={` ${paymentHistory.length>0?"sm-scroll":null}`}>
+                  {
+                    paymentHistory.length > 0 ?
+                      <table class="table table-striped text-center">
+                        <tr>
+                          <th>#</th>
+                          <th>Amount</th>
+                          <th>Type</th>
+                          <th>Approved</th>
+                          <th>Payment date</th>
+                          <th>Due date</th>
+                        </tr>
+                        {
+                          paymentHistory.slice().reverse().map((item, i) => (
+                            i<5?
+                            <tr className={i % 2 == 0 && i !== 0 ? "bg-light" : null}>
+                              <td>{i + 1}</td>
+                              <td>{item.transactionDetails.data.amount}</td>
+                              <td>{item.paymentType}</td>
+                              <td className={`text-${item.resolve?"success":"danger"} fw-semibold`}>{item.resolve ? "True" : 'false'}</td>
+                              <td>{item.transactionDetails.data.created_at.slice(0, 10)}</td>
+                              <td className='text-danger fw-semibold'>{dueDate(item.transactionDetails.data.created_at.slice(0, 10))}</td>
+                            </tr>
+                            :null
+                          ))
+                        }
+                      </table>
+                      :
+                      <h6>No history </h6>
+                  }
                 </div>
               </div>
             </div>

@@ -90,3 +90,13 @@
       height:auto !important;
     }
   }
+
+  @media (max-width:600px) {
+    .sm-scroll{
+      overflow-x: scroll;
+    }
+    .sm-scroll .table{
+      width: 610px;
+
+    }
+  }
