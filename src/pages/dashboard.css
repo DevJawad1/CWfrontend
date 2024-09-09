@@ -99,4 +99,14 @@
       width: 610px;
 
     }
+
+    .sm-scroll::-webkit-scrollbar{
+      height: 5px;
+      background: rgba(128, 128, 128, 0.205);
+
+    }
+    .sm-scroll::-webkit-scrollbar-thumb{
+      background: rgba(128, 128, 128, 0.339);
+      
+    }
   }

@@ -217,7 +217,7 @@ const Dashboard = () => {
                             i<5?
                             <tr className={i % 2 == 1 || i==0 ? "bg-light" : null}>
                               <td>{i + 1}</td>
-                              <td>{item.transactionDetails.data.amount}</td>
+                              <td>₦ {item.transactionDetails.data.amount}.00</td>
                               <td>{item.paymentType}</td>
                               <td className={`text-${item.resolve?"success":"danger"} fw-semibold`}>{item.resolve ? "True" : 'false'}</td>
                               <td>{item.transactionDetails.data.created_at.slice(0, 10)}</td>
