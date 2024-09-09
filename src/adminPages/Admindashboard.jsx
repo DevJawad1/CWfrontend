@@ -8,7 +8,7 @@ const Admindashboard = () => {
     const [allBooker, setallBooker] = useState('')
     const [allBooking, setallBooking] = useState([])
     const getBookedCar=()=>{
-        axios.post('http://localhost:5000/admin/allbookedCar').then(res=>{
+        axios.post('https://cw-backend-five.vercel.app/admin/allbookedCar').then(res=>{
             console.log(res.data);
             setallBooker(res.data.allBooker)
             setallBooking(res.data.allBooking)
@@ -73,16 +73,10 @@ const Admindashboard = () => {
                                             <div className="shadow-sm rounded col-6 p-2" key={owner}>
                                                     <h6>{owner}</h6>
                                                     <h6>Booked {count} cars</h6>
-                                                    {type} class
+                                                    <span style={{textTransform:"capitalize"}}>{type}</span> class member
                                             </div>
                                             :null
                                         ))}
-                                        {/* <li key={owner}>{owner} has {count} cars.</li> */}
-                                        {/* <div className="shadow-sm rounded col-6 p-2">
-                                            <h6>Adex logistic</h6>
-                                            <h6>Booked 1 cars</h6>
-                                            First class
-                                        </div> */}
                                     </div>
                                     <div className="d-flex mt-2">
                                         <h6 className='text-success'>Assign staff </h6>
