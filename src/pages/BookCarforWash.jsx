@@ -12,43 +12,33 @@ const BookCarforWash = () => {
     const [serverDate, setServerDate] = useState(null);
     const [deviceDate, setDeviceDate] = useState(null);
     const [dateDiscrepancy, setDateDiscrepancy] = useState(true);
-    const [warningShown, setWarningShown] = useState(false);
-    const checkDate = () => {
+  
+    const checkDate=()=>{
         fetch('https://cw-backend-five.vercel.app/server-date')
-          .then(response => response.json())
-          .then(data => {
-            const serverDate = new Date(data.serverDate);
-            setServerDate(serverDate);
+        .then(response => response.json())
+        .then(data => {
+          const serverDate = new Date(data.serverDate);
+          setServerDate(serverDate);
+  
+          const deviceDate = new Date().toISOString().split('T')[0];
+          setDeviceDate(deviceDate);
+  
+          // Compare dates
+          if (serverDate.toISOString().split('T')[0] !== deviceDate) {
+            setDateDiscrepancy(false);
+            toast.error(`Warning: Your device date (${deviceDate}), does not match with the current date (${serverDate.toISOString().split('T')[0]}).`)
+          } else {
+            setDateDiscrepancy(true);
+            toast.success('Date is correct')
+          }
+        })
+        .catch(error => console.error('Error fetching server date:', error));
+    }
+    useEffect(() => {
     
-            const deviceDate = new Date().toISOString().split('T')[0];
-            setDeviceDate(deviceDate);
-    
-            // Compare dates
-            if (serverDate.toISOString().split('T')[0] !== deviceDate) {
-              if (!warningShown) {
-                setWarningShown(true);
-                toast.error(`Warning: Your device date is ${deviceDate}, while the server date is ${serverDate.toISOString().split('T')[0]}.`);
-              }
-              setDateDiscrepancy(false);
-            } else {
-              setDateDiscrepancy(true);
-              setWarningShown(false); // Reset warning state if dates are correct
-              toast.success('Date is correct');
-            }
-          })
-          .catch(error => console.error('Error fetching server date:', error));
-      };
-    
-      useEffect(() => {
-        // Check date every minute (60000 milliseconds)
-        const intervalId = setInterval(checkDate, 60000);
-    
-        // Initial check
-        checkDate();
-    
-        // Cleanup on component unmount
-        return () => clearInterval(intervalId);
-      }, [warningShown]);
+      checkDate()
+      
+    },[]);
   
     const [allCar, setallCar] = useState([])
     const [Miniloading, setMiniloading] = useState(false)
@@ -135,12 +125,16 @@ const BookCarforWash = () => {
         return selectedCars.some((item) => item.carId === i);
     };
     const submitBookedCar=()=>{
-        selectedCars.length<1?toast.error("No car selected. Select the car you are washing"):
-        axios.post('https://cw-backend-five.vercel.app/member/savebookcar', { user: localStorage.cwUser , allcars:selectedCars}).then((response)=>{
-            response.data.status?toast.success(response.data.msg):toast.error(response.data.msg)
-        }).catch((err)=>{
-            toast.error(err)
-        })
+        checkDate()
+
+        if(dateDiscrepancy){
+            selectedCars.length<1?toast.error("No car selected. Select the car you are washing"):
+            axios.post('https://cw-backend-five.vercel.app/member/savebookcar', { user: localStorage.cwUser , allcars:selectedCars}).then((response)=>{
+                response.data.status?toast.success(response.data.msg):toast.error(response.data.msg)
+            }).catch((err)=>{
+                toast.error(err)
+            })
+        }
     }
     return (
         <div>
