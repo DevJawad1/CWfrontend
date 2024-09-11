@@ -11,11 +11,10 @@ const BookCarforWash = () => {
     // console.log(serverDate, deviceDate, dateDis)
     const [serverDate, setServerDate] = useState(null);
     const [deviceDate, setDeviceDate] = useState(null);
-    const [dateDiscrepancy, setDateDiscrepancy] = useState(null);
+    const [dateDiscrepancy, setDateDiscrepancy] = useState(true);
   
-    useEffect(() => {
-      // Fetch server date
-      fetch('https://cw-backend-five.vercel.app/server-date')
+    const checkDate=()=>{
+        fetch('https://cw-backend-five.vercel.app/server-date')
         .then(response => response.json())
         .then(data => {
           const serverDate = new Date(data.serverDate);
@@ -34,7 +33,14 @@ const BookCarforWash = () => {
           }
         })
         .catch(error => console.error('Error fetching server date:', error));
-    }, []);
+    }
+    useEffect(() => {
+        if(dateDiscrepancy!==dateDiscrepancy){
+            checkDate()
+            
+        }
+      
+    });
   
     const [allCar, setallCar] = useState([])
     const [Miniloading, setMiniloading] = useState(false)
