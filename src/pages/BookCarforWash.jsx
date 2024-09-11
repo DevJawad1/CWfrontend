@@ -26,7 +26,7 @@ const BookCarforWash = () => {
           // Compare dates
           if (serverDate.toISOString().split('T')[0] !== deviceDate) {
             setDateDiscrepancy(false);
-            toast.error(`Warning: Your device date (${deviceDate}), does not match with the current date (${serverDate.toISOString().split('T')[0]}).`)
+            toast.error(`Warning: Your device date (${deviceDate}), does not match with the current date (${serverDate.toISOString().split('T')[0]}). Go to your setting`)
           } else {
             setDateDiscrepancy(true);
             toast.success('Date is correct')
