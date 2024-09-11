@@ -8,6 +8,34 @@ import './bookcar.css'
 import CarLoading from '../component/CarLoading'
 import NocarFound from '../component/NocarFound'
 const BookCarforWash = () => {
+    // console.log(serverDate, deviceDate, dateDis)
+    const [serverDate, setServerDate] = useState(null);
+    const [deviceDate, setDeviceDate] = useState(null);
+    const [dateDiscrepancy, setDateDiscrepancy] = useState(null);
+  
+    useEffect(() => {
+      // Fetch server date
+      fetch('https://cw-backend-five.vercel.app/server-date')
+        .then(response => response.json())
+        .then(data => {
+          const serverDate = new Date(data.serverDate);
+          setServerDate(serverDate);
+  
+          const deviceDate = new Date().toISOString().split('T')[0];
+          setDeviceDate(deviceDate);
+  
+          // Compare dates
+          if (serverDate.toISOString().split('T')[0] !== deviceDate) {
+            setDateDiscrepancy(false);
+            toast.error(`Warning: Your device date is ${deviceDate}, while the server date is ${serverDate.toISOString().split('T')[0]}.`)
+          } else {
+            setDateDiscrepancy(true);
+            toast.success('Date is correct')
+          }
+        })
+        .catch(error => console.error('Error fetching server date:', error));
+    }, []);
+  
     const [allCar, setallCar] = useState([])
     const [Miniloading, setMiniloading] = useState(false)
     const navigate = useNavigate()
