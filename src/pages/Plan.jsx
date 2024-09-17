@@ -24,12 +24,13 @@ const Plan = () => {
         setminiloading(true)
         setplanStatus(price)
         setloadingtype("Generating account")
-        // http://localhost:5173/membershipplan
-        axios.post("http://localhost:5000/member/virtualaccount", { userid: localStorage.cwUser, collectAmount: price, planType: "Get membership" }).then((response) => {
+        axios.post("https://cw-backend-five.vercel.app/member/virtualaccount", { userid: localStorage.cwUser, collectAmount: price, planType: "Get membership" }).then((response) => {
             console.log(response);
             if(response.data.status){
                 setbank(response.data.bank)
             }else{
+                setbank("No account")
+                setloadingtype(response.data.msg)
                 toast.error(response.data.msg)
             }
             setminiloading(false)
@@ -52,7 +53,7 @@ const Plan = () => {
                 console.log(err);
 
             });
-        }, 150000)
+        }, 75000)
     }
 
 
@@ -174,6 +175,7 @@ const Plan = () => {
                                 <div className='col-12 col-md-6 px-2'>
                                     {
                                         !miniloading ?
+                                            bank!=="No account"?
                                             <div className="bg-white p-4 shadow w-100">
                                                 <h5>Payment </h5>
                                                 <div>
@@ -190,6 +192,11 @@ const Plan = () => {
                                                         <button className='btn btn-success ' style={{ visibility: "hidden" }} onClick={!stopFunction ? verifyPayment2(bank.tx_ref) : null}>I have paid</button>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            :
+                                            <div className='bg-white  p-4 shadow w-100'>
+                                                <h6 className='text-danger'>{loadingtype}</h6>
+                                                <button className='btn btn-success'>View plan</button>
                                             </div>
                                             :
                                             <div className='bg-white p-4 shadow w-100 ' style={{ height: "210px" }}>
