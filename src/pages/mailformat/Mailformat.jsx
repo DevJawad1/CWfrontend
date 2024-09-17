@@ -14,6 +14,8 @@ const Mailformat = () => {
         <h6 style={{fontSize:"18px"}}>This user, <span style={{color:"green", fontSize:"20px"}}>Jawad</span> books <br /> <span style={{color:"green", fontSize:"22px"}}>3 cars</span> <br />They are waiting to get response from you, go and give them a time</h6>
         <button style={{border:"none", backgroundColor:"#0E47A1", color:"white", borderRadius:"5px", padding:"10px"}}>Give them response</button>
     </div>
+
+    <div style={{boxShadow:"1px 1px 2px 2px #0e46a139", margin:"20px", padding:"30px", borderRadius:"5px", position:""}}><h5 style={{borderBottom:"1px solid gray"}}>Reset password</h5><h6 style={{fontSize:"18px"}}>Dear <span style={{color:"green", fontSize:"20px"}}>Jawad</span>, the below digit is the code to reset your password</h6><h4>504933</h4><h6>Note: this code will expire in thirty minutes</h6></div>
    </div>
   )
 }
