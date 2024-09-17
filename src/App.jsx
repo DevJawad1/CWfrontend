@@ -22,6 +22,7 @@ import SidebarTwo from './component/SidebarTwo'
 import Admindashboard from './adminPages/Admindashboard'
 import AdminProfile from './adminPages/Profile'
 import Addadmin from './adminPages/Addadmin'
+import Resetpassword from './pages/auth/Resetpassword'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -35,6 +36,7 @@ function App() {
         <Route path='/home' element={<LandingPage/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/resetpassword' element={<Resetpassword/>}/>
         <Route path='/loading' element={<Loading/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path='/uploadcar' element={<Uploadcar/>}/>

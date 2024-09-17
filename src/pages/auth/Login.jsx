@@ -87,7 +87,7 @@ const Login = () => {
                                 </span>
                                 </div>
                             </div>
-                            <h5 className='px-md-2 mt-3'><Link>forgot password ?</Link></h5>
+                            <h5 className='px-md-2 mt-3'><Link to={'/resetpassword'}>forgot password ?</Link></h5>
                             <div className="px-0 px-md-2 p-md-0 mt-4 w-100 text-center">
                             <button className='col-6 col-md-3 btn btn-custom pt-2 text-white' type="submit" disabled={isSubmitting} style={{backgroundColor:"#C81C2E", height:"50px", borderRadius:"30px"}}>
                                 Login
