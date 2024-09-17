@@ -5,6 +5,7 @@ import carouselimg1 from '../../img/carousel-1.jpg';
 import { toast } from 'react-toastify';
 import PinInput from 'react-pin-input';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Resetpassword = () => {
     const [loading, setloading] = useState(false);
@@ -12,6 +13,7 @@ const Resetpassword = () => {
     const [box, setbox] = useState('email');
     const [otp, setOtp] = useState('');
 
+    const navigate = useNavigate()
     // Function to send OTP code to the email
     const sendCode = () => {
         if (!email) {
@@ -39,7 +41,7 @@ const Resetpassword = () => {
             axios.post('http://localhost:5000/member/verifycode', { email, otp, type:"Reset password" }).then((res) => {
                 if (res.data.status) {
                     toast.success("OTP verified successfully");
-                    // Proceed to password reset or other action
+                    setbox("reset")
                 } else {
                     toast.error(res.data.msg);
                 }
@@ -54,6 +56,35 @@ const Resetpassword = () => {
         setOtp(otp);
     };
 
+
+    const [ps1, setps1] = useState('')
+    const [ps2, setps2] = useState('')
+    const [psMode, setpsMode] = useState('Show')
+
+    const psChanger=()=>{
+        if(psMode=='Show'){
+            setpsMode("Hide")
+        }else{
+            setpsMode("Show")
+        }
+    }
+
+    const setNewPassword=()=>{
+
+        if(ps1!==ps2){
+            toast.error('Password mismatch')
+        }else{
+            axios.post("http://localhost:5000/member/resetpassword", {email, ps1}).then((res)=>{
+            if(res.data.status){
+                toast.success(res.data.msg)
+                navigate('/login')
+            }else{
+                toast.error(res.data.msg)
+            }
+        })   
+        }
+       
+    }
     return (
         <div>
             {loading ? <Loading msg={"Loading..."} /> : null}
@@ -103,6 +134,25 @@ const Resetpassword = () => {
                             </button>
                         </div>
                     </div>
+
+
+                    <div className={box=="reset"?"d-block":"d-none"}>
+                        <div className="d-flex justify-content-between">
+                        <h6 onClick={psChanger} style={{cursor:"pointer"}}>{psMode} password</h6>
+                        <h4 className='fw-bold text-secondary text-cener text-md-end'>Reset password</h4>
+
+                        </div>
+
+                    <input type={psMode=='Show'?"password":"text"} placeholder='New password' className="w-100 bg-light rounded px-2" style= {{ height: "50px", border: "2px solid #202C45", outline: "none" }} onChange={(e) => setps1(e.target.value)} />
+
+                    <input type={psMode=='Show'?"password":"text"} placeholder='Confirm password' className="w-100 bg-light rounded px-2 mt-2" style={{ height: "50px", border: "2px solid #202C45", outline: "none" }} onChange={(e) => setps2(e.target.value)} />
+                    <div className="col-12 p-2 text-center mt-2">
+                            <button className='btn btn-success p-2 col-8' onClick={setNewPassword} style={{ borderRadius: "25px", height: "50px" }}>
+                                Set password
+                            </button>
+                    </div>
+                    </div>
+
                 </div>
             </div>
         </div>
