@@ -36,7 +36,7 @@ const Resetpassword = () => {
         if (otp.length !== 6) {
             toast.error("Please enter a valid 6-digit code.");
         } else {
-            axios.post('http://localhost:5000/member/verifycode', { email, otp }).then((res) => {
+            axios.post('http://localhost:5000/member/verifycode', { email, otp, type:"Reset password" }).then((res) => {
                 if (res.data.status) {
                     toast.success("OTP verified successfully");
                     // Proceed to password reset or other action
@@ -69,7 +69,7 @@ const Resetpassword = () => {
                     {/* Email Input Box */}
                     <div className={box === "email" ? "d-block" : "d-none"}>
                         <h4 className='fw-bold text-secondary text-cener text-md-end'>Reset password</h4>
-                        <div className='px-md-2 mt-2'>
+                        <div className='px-md-2 mt-md-5 mt-3'>
                             <span htmlFor="email">Enter your Email</span><br />
                             <input type="email" name="email" placeholder='example@gmail.com' className="w-100 bg-light rounded px-2" style={{ height: "50px", border: "2px solid #202C45", outline: "none" }} onChange={(e) => setemail(e.target.value)} />
                         </div>
@@ -86,19 +86,19 @@ const Resetpassword = () => {
                             <h6 style={{ cursor: "pointer" }} onClick={() => setbox('email')}>Back</h6>
                             <h4 className='fw-bold text-secondary text-cener text-md-end'>Input code</h4>
                         </div>
-                        <div>
-                        <PinInput
-        length={6}
-        initialValue=""
-        onChange={(value) => setOtp(value)}
-        type="numeric"
-        inputStyle={{ borderColor: 'black' }}
-        inputFocusStyle={{ borderColor: 'blue' }}
-        onComplete={(value) => console.log(value)}  // Handle the OTP completion
-      />
+                        <div className='text-center mt-md-5 mt-4'>
+                            <PinInput
+                                length={6}
+                                initialValue=""
+                                onChange={(value) => setOtp(value)}
+                                type="numeric"
+                                inputStyle={{ borderColor: '#202C45',border: "2px solid", borderRadius:"5px " }}
+                                inputFocusStyle={{ borderColor: 'green' }}
+                                onComplete={(value) => console.log(value)}  // Handle the OTP completion
+                            />
                         </div>
-                        <div className="col-12 p-2 text-end">
-                            <button className='btn btn-success p-2 col-md-3 col-6' onClick={submitOTP} style={{ borderRadius: "30px", height: "50px" }}>
+                        <div className="col-12 p-2 text-center mt-2">
+                            <button className='btn btn-success p-2 col-6' onClick={submitOTP} style={{ borderRadius: "25px", height: "50px" }}>
                                 Submit code <i className="bi bi-arrow-right"></i>
                             </button>
                         </div>
