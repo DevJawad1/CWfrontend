@@ -261,6 +261,10 @@ const Dashboard = () => {
                       :
                       <h6>No history </h6>
                   }
+                  {
+                    paymentHistory.length>5?
+                    <button className='btn border-0 text-success'>View all <i class="bi bi-arrow-right-short"></i></button>:null
+                  }
                 </div>
               </div>
             </div>
