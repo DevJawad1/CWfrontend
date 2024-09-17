@@ -29,7 +29,7 @@ const BookCarforWash = () => {
             toast.error(`Warning: Your device date (${deviceDate}), does not match with the current date (${serverDate.toISOString().split('T')[0]}). Go to your setting`)
           } else {
             setDateDiscrepancy(true);
-            toast.success('Date is correct')
+            // toast.success('Date is correct') 
           }
         })
         .catch(error => console.error('Error fetching server date:', error));

@@ -18,37 +18,40 @@ const Plan = () => {
     useEffect(() => {
         getUserDetails()
     }, [])
-    
+
     const [loadingtype, setloadingtype] = useState('')
-    const generateAccount=(price)=>{
+    const generateAccount = (price) => {
         setminiloading(true)
         setplanStatus(price)
         setloadingtype("Generating account")
         // http://localhost:5173/membershipplan
-        axios.post("https://cw-backend-five.vercel.app/member/virtualaccount", {userid:localStorage.cwUser, collectAmount:price, planType:"Get membership"}).then((response)=>{
+        axios.post("https://cw-backend-five.vercel.app/member/virtualaccount", { userid: localStorage.cwUser, collectAmount: price, planType: "Get membership" }).then((response) => {
             console.log(response);
             setbank(response.data.bank)
             setminiloading(false)
         })
     }
 
-    const verifyPayment = (tx_ref)=>{
+    const verifyPayment = (tx_ref) => {
         setminiloading(true)
         setloadingtype("Verifying Payment")
-        axios.post("https://cw-backend-five.vercel.app/member/verifyPayment",{tx_ref:tx_ref, userid:localStorage.cwUser}).then(response=>{
-            setminiloading(false)
-            if(response.data.status){
-                toast.success(response.data.msg)
-            }else{
-                toast.error(response.data.msg)
-            }
-            
-        }).catch((err)=>{
-            console.log(err);
-        })
+        setTimeout(() => {
+            axios.post("https://cw-backend-five.vercel.app/member/verifyPayment", { tx_ref: tx_ref, userid: localStorage.cwUser }).then(response => {
+                setminiloading(false)
+                if (response.data.status) {
+                    toast.success(response.data.msg)
+                } else {
+                    toast.error(response.data.msg)
+                }
+
+            }).catch((err) => {
+                console.log(err);
+
+            });
+        }, 150000)
     }
 
-    
+
     const [stopFunction, setStopFunction]= useState(false)
     const verifyPayment2=(tx_ref)=>{
         axios.post("https://cw-backend-five.vercel.app/member/verifyPayment",{tx_ref:tx_ref, userid:localStorage.cwUser}).then(response=>{
@@ -56,7 +59,7 @@ const Plan = () => {
                 toast.success(response.data.msg)
                 setStopFunction(true)
             }
-            
+
         }).catch((err)=>{
             console.log(err);
         })    
@@ -64,6 +67,7 @@ const Plan = () => {
     return (
 
         <div>
+            // ae 93
             <Bluebackground />
             <div className="position-absolute dashboard w-100" style={{ top: "0", zIndex: "2" }}>
                 <GreetingLabel msg={"Choose your plan"} />
@@ -75,7 +79,7 @@ const Plan = () => {
                                     <div className="w-100 mt-2 mt-md-0 px-1">
                                         <div className="bg-light h-100 rounded p-2 shadow">
                                             <div className="d-flex justify-content-between w-100">
-                                         
+
                                                 <h6>No special feature</h6>
                                                 <div className="border col-1 d-flex justify-content-center align-items-center bg-primary text-white" style={{ borderRadius: "50%", height: "30px", backgroundColor: "#84A2CF" }}>
                                                     <span class="bi bi-person"></span>
@@ -158,50 +162,50 @@ const Plan = () => {
                         </div>
                         :
                         <div>
-                            <div className="d-flex text-white gap-1 px-1 px-md-4" onClick={()=>{setplanStatus('')}}>
+                            <div className="d-flex text-white gap-1 px-1 px-md-4" onClick={() => { setplanStatus('') }}>
                                 <i class="bi bi-arrow-left-short"></i>
                                 <h6 className='text-white'>Go back</h6>
                             </div>
                             <div className='d-md-flex p-0 mx-md-3 mt-1'>
-                            <div className='col-12 col-md-6 px-2'>
-                                {
-                                    !miniloading?
-                                    <div className="bg-white p-4 shadow w-100">
-                                    <h5>Payment </h5>
-                                    <div>
-                                        <h6> <span className='text-danger'>Note: </span> You are to pay this amount <span className='text-primary fw-semibold'>₦{planStatus}</span> to the account below </h6>
-                                        <div className="d-flex align-items-center" style={{gap:"5px"}}>
-                                        <h4>{bank.accountNumber|| "loading"}</h4>
-                                        <h6>{bank.bankName|| "loading"}</h6>
-                                        </div>
-                                        <h6>Expired in next one hour time : {bank.expire_date}</h6>
-                                        <h6>Click the button after you have make payment</h6>
+                                <div className='col-12 col-md-6 px-2'>
+                                    {
+                                        !miniloading ?
+                                            <div className="bg-white p-4 shadow w-100">
+                                                <h5>Payment </h5>
+                                                <div>
+                                                    <h6> <span className='text-danger'>Note: </span> You are to pay this amount <span className='text-primary fw-semibold'>₦{planStatus}</span> to the account below </h6>
+                                                    <div className="d-flex align-items-center" style={{ gap: "5px" }}>
+                                                        <h4>{bank.accountNumber || "loading"}</h4>
+                                                        <h6>{bank.bankName || "loading"}</h6>
+                                                    </div>
+                                                    <h6>Expired in next one hour time : {bank.expire_date}</h6>
+                                                    <h6>Click the button after you have make payment</h6>
 
-                                        <div className="d-flex justify-content-between">
-                                            <button className='btn btn-success' onClick={()=>{verifyPayment(bank.tx_ref)}}>I have paid</button>
-                                            <button className='btn btn-success ' style={{visibility:"hidden"}} onClick={!stopFunction?verifyPayment2(bank.tx_ref):null}>I have paid</button>
+                                                    <div className="d-flex justify-content-between">
+                                                        <button className='btn btn-success' onClick={() => { verifyPayment(bank.tx_ref) }}>I have paid</button>
+                                                        <button className='btn btn-success ' style={{ visibility: "hidden" }} onClick={!stopFunction ? verifyPayment2(bank.tx_ref) : null}>I have paid</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            :
+                                            <div className='bg-white p-4 shadow w-100 ' style={{ height: "210px" }}>
+                                                <Miniloading msg={loadingtype} />
+                                            </div>
+                                    }
+                                </div>
+                                <div className='col-12 col-md-6 px-2'>
+
+                                    <div className="bg-white p-4 shadow w-100 mt-3 mt-md-0 ">
+                                        <h5>I want to link my card </h5>
+                                        <div>
+                                            <h6> <span className='text-danger'>Select: </span>Choose the card you are using </h6>
+                                            <h4>9152280668</h4>
+                                            <h6>Click the button after you have make payment</h6>
+                                            <button className='btn btn-success'>Submit</button>
                                         </div>
                                     </div>
                                 </div>
-                                    :
-                                <div className='bg-white p-4 shadow w-100 ' style={{height:"210px"}}>
-                                    <Miniloading msg={loadingtype}/>
-                                </div>
-                                }
                             </div>
-                            <div className='col-12 col-md-6 px-2'>
-
-                                <div className="bg-white p-4 shadow w-100 mt-3 mt-md-0 ">
-                                    <h5>I want to link my card </h5>
-                                    <div>
-                                        <h6> <span className='text-danger'>Select: </span>Choose the card you are using </h6>
-                                        <h4>9152280668</h4>
-                                        <h6>Click the button after you have make payment</h6>
-                                        <button className='btn btn-success'>Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         </div>
                 }
             </div>

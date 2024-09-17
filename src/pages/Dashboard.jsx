@@ -5,6 +5,7 @@ import axios from 'axios'
 import Loading from '../component/Loading'
 import GreetingLabel from '../component/GreetingLabel'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 const Dashboard = () => {
   const [loading, setloading] = useState(false)
   const navigate = useNavigate()
@@ -52,6 +53,28 @@ const Dashboard = () => {
     let formattedDate = date.toISOString().split('T')[0];
     return formattedDate
   }
+
+  const [miniloading, setminiloading] = useState(false)
+  const [loadingtype, setloadingtype] = useState('')
+  const verifyPayment = (tx_ref) => {
+    setminiloading(true)
+    setloadingtype("Resolving")
+    setTimeout(() => {
+        axios.post("https://cw-backend-five.vercel.app/member/verifyPayment", { tx_ref: tx_ref, userid: localStorage.cwUser }).then(response => {
+            setminiloading(false)
+            if (response.data.status) {
+                toast.success("Resolved "+response.data.msg)
+                setloadingtype("Resoved")
+            } else {
+                toast.error(response.data.msg)
+            }
+
+        }).catch((err) => {
+            console.log(err);
+
+        });
+    }, 5000)
+}
   return (
     <div className='c'>
       {/* {loading?<Loading/>:null} */}
@@ -196,7 +219,7 @@ const Dashboard = () => {
         </div>
 
         <div className="fourth-section">
-          <div className={`mx-2 mx-md-4 m-3 shadow`}>
+          <div className={`mx-2 mx-md-4 m-3 shadow bg-white`}>
             <div className="mt-3 mt-md-0 p-0 px-md-2 pt-md-3">
               <div className=" rounded p-2 ">
                 <h5>Payment history</h5>
@@ -208,18 +231,26 @@ const Dashboard = () => {
                           <th>#</th>
                           <th>Amount</th>
                           <th>Type</th>
-                          <th>Approved</th>
+                          <th>Resolved</th>
                           <th>Payment date</th>
-                          <th>Due date</th>
+                          <th>Expired date</th>
                         </tr>
                         {
                           paymentHistory.slice().reverse().map((item, i) => (
                             i<5?
-                            <tr className={i % 2 == 1 || i==0 ? "bg-light" : null}>
-                              <td>{i + 1}</td>
+                            <tr className={i % 2 == 0 ? "bg-light" : null}>
+                              
+                              <td  className=''>
+                                {item.currently?<h6 className='position-relative mx-auto bg-success p-0 text-white' style={{height:"18px", borderRadius:"20px", width:"60px", marginTop:"-20px", fontSize:"12px"}}>current</h6>:null}
+                                {i + 1}
+                              </td>
                               <td>₦ {item.transactionDetails.data.amount}.00</td>
                               <td>{item.paymentType}</td>
-                              <td className={`text-${item.resolve?"success":"danger"} fw-semibold`}>{item.resolve ? "True" : 'false'}</td>
+                              <td className={`text-${item.resolve?"success":"danger"} fw-semibold`}>
+                                {item.resolve ? "True" : 
+                                <>False, <button className='btn btn-success ' onClick={()=>{verifyPayment(item.transactionDetails.data.tx_ref)}}>{loadingtype || 'Resolve now'}</button></>
+                                }
+                              </td>
                               <td>{item.transactionDetails.data.created_at.slice(0, 10)}</td>
                               <td className='text-danger fw-semibold'>{dueDate(item.transactionDetails.data.created_at.slice(0, 10))}</td>
                             </tr>
