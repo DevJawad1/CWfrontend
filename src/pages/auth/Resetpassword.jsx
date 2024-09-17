@@ -19,7 +19,7 @@ const Resetpassword = () => {
         if (!email) {
             toast.error("Email cannot be empty");
         } else {
-            axios.post('http://localhost:5000/member/sendcode', { email }).then((res) => {
+            axios.post('https://cw-backend-five.vercel.app/member/sendcode', { email }).then((res) => {
                 if (!res.data.status) {
                     toast.error(res.data.msg);
                 } else {
@@ -38,7 +38,7 @@ const Resetpassword = () => {
         if (otp.length !== 6) {
             toast.error("Please enter a valid 6-digit code.");
         } else {
-            axios.post('http://localhost:5000/member/verifycode', { email, otp, type:"Reset password" }).then((res) => {
+            axios.post('https://cw-backend-five.vercel.app/member/verifycode', { email, otp, type:"Reset password" }).then((res) => {
                 if (res.data.status) {
                     toast.success("OTP verified successfully");
                     setbox("reset")
@@ -74,7 +74,7 @@ const Resetpassword = () => {
         if(ps1!==ps2){
             toast.error('Password mismatch')
         }else{
-            axios.post("http://localhost:5000/member/resetpassword", {email, ps1}).then((res)=>{
+            axios.post("https://cw-backend-five.vercel.app/member/resetpassword", {email, ps1}).then((res)=>{
             if(res.data.status){
                 toast.success(res.data.msg)
                 navigate('/login')
