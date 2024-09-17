@@ -83,7 +83,7 @@ const Dashboard = () => {
         <GreetingLabel msg={"Welcome to Auto Wash"} />
         <div className="d-md-flex w-100 px-2 px-md-3 mt-3 xlabel">
           <div className="col-md-3 mt-2 mt-md-0 px-1">
-            <div className="bg-light h-100 rounded p-2 shadow">
+            <div className="bg-white h-100 rounded p-2 shadow-sm">
               <div className="d-flex justify-content-between w-100">
                 <h6>Membeship plan</h6>
                 <div className="border col-1 d-flex justify-content-center align-items-center bg-primary text-white" style={{ borderRadius: "50%", height: "30px", backgroundColor: "#84A2CF" }}>
@@ -103,7 +103,7 @@ const Dashboard = () => {
           </div>
 
           <div className="col-md-3 mt-2 mt-md-0 px-1">
-            <div className="bg-light h-100 rounded p-2 shadow">
+            <div className="bg-white h-100 rounded p-2 shadow-sm">
               <div className="d-flex justify-content-between w-100">
                 <h6>Membeship car</h6>
                 <div className="border col-1 d-flex justify-content-center align-items-center bg-primary text-white" style={{ borderRadius: "50%", height: "30px", backgroundColor: "#84A2CF" }}>
@@ -119,7 +119,7 @@ const Dashboard = () => {
           </div>
 
           <div className="col-md-3 mt-2 mt-md-0 px-1">
-            <div className="bg-light h-100 rounded p-2 shadow">
+            <div className="bg-white h-100 rounded p-2 shadow-sm">
               <div className="d-flex justify-content-between w-100">
                 <h6>Become VIP</h6>
                 <div className="border col-1 d-flex justify-content-center align-items-center bg-primary text-white" style={{ borderRadius: "50%", height: "30px", backgroundColor: "#84A2CF" }}>
@@ -135,7 +135,7 @@ const Dashboard = () => {
           </div>
 
           <div className="col-md-3 mt-2 mt-md-0 px-1">
-            <div className="bg-light h-100 rounded p-2 shadow">
+            <div className="bg-white h-100 rounded p-2 shadow-sm">
               <div className="d-flex justify-content-between w-100">
                 <h6>Membeship due</h6>
                 <div className="border col-1 d-flex justify-content-center align-items-center bg-primary text-white" style={{ borderRadius: "50%", height: "30px", backgroundColor: "#84A2CF" }}>
