@@ -25,9 +25,13 @@ const Plan = () => {
         setplanStatus(price)
         setloadingtype("Generating account")
         // http://localhost:5173/membershipplan
-        axios.post("https://cw-backend-five.vercel.app/member/virtualaccount", { userid: localStorage.cwUser, collectAmount: price, planType: "Get membership" }).then((response) => {
+        axios.post("http://localhost:5000/member/virtualaccount", { userid: localStorage.cwUser, collectAmount: price, planType: "Get membership" }).then((response) => {
             console.log(response);
-            setbank(response.data.bank)
+            if(response.data.status){
+                setbank(response.data.bank)
+            }else{
+                toast.error(response.data.msg)
+            }
             setminiloading(false)
         })
     }
